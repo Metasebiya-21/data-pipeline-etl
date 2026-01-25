@@ -9,9 +9,10 @@ This project scaffolds an Apache Airflow (Docker) pipeline that incrementally sy
 - Pydantic settings loading from `.env`
 
 ## Prerequisites
-- Docker Desktop
+- Docker
 - MongoDB replica set (required for change streams)
 - Oracle database reachable from the Airflow containers
+- If setup with docker make sure all containers are running on the same docker network
 
 ## Quick start
 1. Update `.env` with your MongoDB and Oracle settings.
@@ -41,9 +42,14 @@ If you want to use an external Oracle DB later, update `ORACLE_DSN` (or use `ORA
 
 ## Report ETL schema
 The Oracle init script creates a `REPORT_ETL` schema and applies `db/report_etl_schema.sql` automatically on first start.
-The `mongo_oracle_etl` DAG loads from MongoDB database `coop-customer-management-db` and collection `customers`.
+## for manually creating the tables use the ff
+  - docker exec -it airflow_etl_oracle bash
+  - bash -x /container-entrypoint-initdb.d/01_create_report_etl.sh
+
+The `mongo_oracle_etl` DAG loads from MongoDB database `customer-management-db` and collection `customers`.
 Set `FULL_REFRESH=1` in `.env` to load all customer documents regardless of `updatedDate`/`createdDate`.
 Set `INITIAL_LOAD=1` for a one-time full load; the DAG will mark it complete via `customers_initial_load_done`.
+
 
 ## Notes
 - Incremental extraction uses `updated_at >= last_ts`. The DAG stores `last_ts` in Airflow Variables as `mongo_oracle_last_ts`.

@@ -1,0 +1,1709 @@
+[
+{
+  "_id": "6663014a20160be6be5f1698",
+  "phone": "+251968942148",
+  "personalAddresses": [
+    {
+      "region": "ADDIS_ABABA",
+      "city": "Addis Ababa (City)",
+      "subcityZone": "Bole",
+      "woreda": "09",
+      "houseNumber": "370",
+      "createdDate": 1728102317
+    }
+  ],
+  "bankInformations": [
+    {
+      "accountNumber": "0947727830102",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": true,
+      "customerNumber": "0947727800000",
+      "additionalInformation": {
+        "accountNo": "0947727830102",
+        "customerId": "0947727800000",
+        "name": "ALEXANDER HADGU GIRMAY",
+        "branchId": "107",
+        "status": "ACTIVE",
+        "mobile": "0968942148",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2023-12-06T08:00"
+      }
+    }
+  ],
+  "educationalLevels": [
+    {
+      "level": "BACHELOR_DEGREE",
+      "startDate": 0,
+      "endDate": 0,
+      "school": "",
+      "updatedDate": 1728102317
+    }
+  ],
+  "maritalStatuses": [
+    "MARRIED"
+  ],
+  "loanInformations": [
+    {
+      "loanProductId": "3b943e19-d112-4cf4-8b7a-c49715f405dc",
+      "loanProductCode": "EFWA",
+      "loanProductName": "Wase"
+    }
+  ],
+  "businesses": [
+    {
+      "tin": "2536459875",
+      "businessLicenseNumber": null,
+      "tinOfSpouse": null,
+      "businessName": "",
+      "managerTinNumber": "",
+      "businessSector": "DOMESTIC_TRADE_SERVICE",
+      "associationType": "INDIVIDUAL",
+      "formOfBusiness": "GROWING",
+      "lineOfBusiness": "Book Selling",
+      "businessRegisteredDate": 1673470800,
+      "numberOfEmployees": 5,
+      "startingNumberOfEmployees": 2,
+      "sourceOfInitialCapital": "FAMILY",
+      "startingCapital": 50000,
+      "currentCapital": 150000,
+      "annualSalesIncome": 150000,
+      "annualProfit": 30000,
+      "businessRenewalDate": null,
+      "additionalInformation": null,
+      "businessAddresses": [
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Bole",
+          "woreda": "09",
+          "houseNumber": "370",
+          "createdDate": 1728102328
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Bole",
+          "woreda": "09",
+          "houseNumber": "370",
+          "createdDate": 1728102328
+        },
+        {
+          "region": "TIGRAY",
+          "city": "Mekelle",
+          "subcityZone": "Mekele",
+          "woreda": "hdase",
+          "houseNumber": "370",
+          "createdDate": 1728102328
+        },
+        {
+          "region": "TIGRAY",
+          "city": "Mekelle",
+          "subcityZone": "Mekele",
+          "woreda": "hdase",
+          "houseNumber": "370",
+          "createdDate": 1728102328
+        },
+        {
+          "region": "TIGRAY",
+          "city": "Mekelle",
+          "subcityZone": "Mekele",
+          "woreda": "hdase",
+          "houseNumber": "370",
+          "createdDate": 1728102328
+        },
+        {
+          "region": "TIGRAY",
+          "city": "Mekelle",
+          "subcityZone": "Mekele",
+          "woreda": "hdase",
+          "houseNumber": "370",
+          "createdDate": 1728102328
+        },
+        {
+          "region": "TIGRAY",
+          "city": "Mekelle",
+          "subcityZone": "Mekele",
+          "woreda": "hdase",
+          "houseNumber": "370",
+          "createdDate": 1728102328
+        },
+        {
+          "region": "TIGRAY",
+          "city": "Mekelle",
+          "subcityZone": "Mekele",
+          "woreda": "hdase",
+          "houseNumber": "370"
+        }
+      ],
+      "businessId": "66631e10d4818110349fc1b5"
+    }
+  ],
+  "userAccountInformation": {
+    "preferredLanguage": "EN",
+    "status": "ACTIVE",
+    "currentStage": "OFFER_REQUESTED",
+    "loanStatus": "ACTIVE",
+    "loanProductCode": "SML"
+  },
+  "verification": {
+    "phone": true
+  },
+  "createdDate": 1717764426,
+  "updatedDate": 1758780325,
+  "deviceToken": "fFxUnFhFQEazwlcdd-4d9L:APA91bEqzblWtsyan6gSHFy-4qpeLaKjNBJ2Kngj3hHUO89yuQAkvKMvVcb8SMPIOo4lobSXIQZcXdKSFATn7nE3wsaGxIsw5nDJ-eyS3xuTWffVkQo02vE",
+  "birthDate": 868136400,
+  "emergencyContactName": "Hadgu Girmay",
+  "emergencyContactPhone": "+251914036748",
+  "fullName": "Alexander Hadgu Girmay",
+  "gender": "FEMALE",
+  "idNumber": "041946",
+  "idType": "DRIVERS_LICENSE",
+  "tinNumber": "2536459875",
+  "documents": [
+    {
+      "id": "66631e7820160be6be5f169c",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/6663014a20160be6be5f1698/document/66631e7820160be6be5f169c",
+      "status": "EXPIRED",
+      "uploadedDate": "2024-06-07"
+    },
+    {
+      "id": "66631e7820160be6be5f169d",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/6663014a20160be6be5f1698/document/66631e7820160be6be5f169d",
+      "status": "VERIFIED",
+      "uploadedDate": "2024-06-07"
+    },
+    {
+      "id": "66631e91b96c8dca1a0f9056",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/6663014a20160be6be5f1698/document/66631e91b96c8dca1a0f9056",
+      "status": "VERIFIED",
+      "uploadedDate": "2024-06-07"
+    },
+    {
+      "id": "66631e92b96c8dca1a0f9057",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/6663014a20160be6be5f1698/document/66631e92b96c8dca1a0f9057",
+      "status": "VERIFIED",
+      "uploadedDate": "2024-06-07"
+    },
+    {
+      "id": "66631e92b96c8dca1a0f9058",
+      "type": "OTHERS",
+      "extension": "pdf",
+      "url": "/customer/6663014a20160be6be5f1698/document/66631e92b96c8dca1a0f9058",
+      "status": "EXPIRED",
+      "uploadedDate": "2024-06-07"
+    }
+  ],
+  "assignedOfficer": {
+    "id": "6662b4fb52c50d3045dfef9a",
+    "name": "Alexander Hadgu Girmay"
+  },
+  "requestId": "76488d59-4571-4ebb-b129-b2c9dea393c6"
+},
+{
+  "_id": "66640038d4818110349fc1b8",
+  "phone": "+251911226494",
+  "personalAddresses": [
+    {
+      "region": "ADDIS_ABABA",
+      "city": "Addis Ababa (City)",
+      "subcityZone": "Kirkos",
+      "woreda": "05",
+      "houseNumber": "310",
+      "createdDate": 1718299529
+    }
+  ],
+  "bankInformations": [
+    {
+      "accountNumber": "0024617830101",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": true,
+      "customerNumber": "0024617800000",
+      "additionalInformation": {
+        "accountNo": "0024617830101",
+        "customerId": "0024617800000",
+        "name": "ABEBAW G/TSADIK W.SEMAYAT",
+        "branchId": "013",
+        "status": "ACTIVE",
+        "mobile": "0911226494",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2010-02-22T08:00"
+      }
+    }
+  ],
+  "educationalLevels": [
+    {
+      "level": "BACHELOR_DEGREE",
+      "startDate": 0,
+      "endDate": 0,
+      "school": "",
+      "updatedDate": 1718299529
+    }
+  ],
+  "maritalStatuses": [
+    "MARRIED"
+  ],
+  "loanInformations": [
+    {
+      "loanProductId": "3b943e19-d112-4cf4-8b7a-c49715f405dc",
+      "loanProductCode": "EFWA",
+      "loanProductName": "Wase"
+    }
+  ],
+  "businesses": [
+    {
+      "tin": "0008049127",
+      "businessLicenseNumber": null,
+      "tinOfSpouse": null,
+      "businessName": "",
+      "managerTinNumber": "",
+      "businessSector": "DOMESTIC_TRADE_SERVICE",
+      "associationType": "INDIVIDUAL",
+      "formOfBusiness": "GROWING",
+      "lineOfBusiness": "Book Selling",
+      "businessRegisteredDate": 1707771600,
+      "numberOfEmployees": 6,
+      "startingNumberOfEmployees": 2,
+      "sourceOfInitialCapital": "OWN",
+      "startingCapital": 100000,
+      "currentCapital": 500000,
+      "annualSalesIncome": 1000000,
+      "annualProfit": 50000,
+      "businessRenewalDate": null,
+      "additionalInformation": null,
+      "businessAddresses": [
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Kirkos",
+          "woreda": "05",
+          "houseNumber": "new"
+        }
+      ],
+      "businessId": "666b2b89b96c8dca1a0f90da"
+    }
+  ],
+  "userAccountInformation": {
+    "preferredLanguage": "EN",
+    "status": "ACTIVE",
+    "currentStage": "OFFER_REQUEST"
+  },
+  "verification": {
+    "phone": true
+  },
+  "createdDate": 1717829688,
+  "updatedDate": 1744810988,
+  "deviceToken": "d0hZCeF5S6yaGDTdH_PHNm:APA91bG3BB26Lw4VLPfg1fcWaAinlf4_0iSZsNj-7w-EN9QMnlMvOK__2hCm7mwKdlif31r4ydP_luV8VOkPnBT8bO6Fw_OiKpnWaWe0QxnLkYL6S35ve_CP5vrIPe-TC3mv6AjQ2eeM",
+  "birthDate": 33339600,
+  "emergencyContactName": "Mulu",
+  "emergencyContactPhone": "+251985927056",
+  "fullName": "abebaw gtsadik wsemayat",
+  "gender": "MALE",
+  "idNumber": "aa0001790522",
+  "idType": "KEBELE_ID",
+  "tinNumber": "0008049127",
+  "documents": [
+    {
+      "id": "666b2c0b20160be6be5f16cf",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/66640038d4818110349fc1b8/document/666b2c0b20160be6be5f16cf",
+      "status": "PENDING",
+      "uploadedDate": "2024-06-13"
+    },
+    {
+      "id": "666b2c0e20160be6be5f16d0",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/66640038d4818110349fc1b8/document/666b2c0e20160be6be5f16d0",
+      "status": "PENDING",
+      "uploadedDate": "2024-06-13"
+    }
+  ],
+  "requestId": "b8079e51-f2a1-4e60-8be5-b93d4a966e69"
+},
+{
+  "_id": "666ac71d20160be6be5f16c9",
+  "phone": "+251966001667",
+  "personalAddresses": [
+    {
+      "region": "ADDIS_ABABA",
+      "city": "Addis Ababa (City)",
+      "subcityZone": "Bole",
+      "woreda": "04",
+      "houseNumber": "new",
+      "createdDate": 1754654141
+    }
+  ],
+  "bankInformations": [
+    {
+      "accountNumber": "0882859631701",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": true,
+      "customerNumber": "0882859600000",
+      "additionalInformation": {
+        "accountNo": "0882859631701",
+        "customerId": "0882859600000",
+        "name": "DANAYT  YRGA BERHE",
+        "branchId": "024",
+        "status": "ACTIVE",
+        "mobile": "0966001667",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2021-06-22T03:00"
+      }
+    },
+    {
+      "accountNumber": "0882859630101",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": false,
+      "customerNumber": "0882859600000",
+      "additionalInformation": {
+        "accountNo": "0882859630101",
+        "customerId": "0882859600000",
+        "name": "DANAYT  YRGA BERHE",
+        "branchId": "024",
+        "status": "ACTIVE",
+        "mobile": "0966001667",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2021-05-24T07:00"
+      }
+    }
+  ],
+  "educationalLevels": [
+    {
+      "level": "BACHELOR_DEGREE",
+      "startDate": 0,
+      "endDate": 0,
+      "school": "",
+      "updatedDate": 1754654141
+    }
+  ],
+  "maritalStatuses": [
+    "UNMARRIED"
+  ],
+  "loanInformations": [
+    {
+      "loanProductId": "89e37d33-3f26-4c93-bee9-152a8e05c1c5",
+      "loanProductCode": "NSL",
+      "loanProductName": "Nano Loan (Safee)"
+    }
+  ],
+  "businesses": [
+    {
+      "tin": "0095627578",
+      "businessLicenseNumber": null,
+      "tinOfSpouse": null,
+      "businessName": "",
+      "managerTinNumber": "",
+      "businessSector": "DOMESTIC_TRADE_SERVICE",
+      "associationType": "INDIVIDUAL",
+      "formOfBusiness": "GROWING",
+      "lineOfBusiness": "Clothing Boutique",
+      "businessRegisteredDate": 1743368400,
+      "numberOfEmployees": 3,
+      "startingNumberOfEmployees": 1,
+      "sourceOfInitialCapital": "OWN",
+      "startingCapital": 100000,
+      "currentCapital": 2000000,
+      "annualSalesIncome": 10000000,
+      "annualProfit": 1200000,
+      "businessRenewalDate": null,
+      "additionalInformation": null,
+      "businessAddresses": [
+        {
+          "region": "TIGRAY",
+          "city": "Shire (Inda Selassie)",
+          "subcityZone": "West Tigray",
+          "woreda": "shire",
+          "houseNumber": "new",
+          "createdDate": 1754654141
+        },
+        {
+          "region": "TIGRAY",
+          "city": "Shire (Inda Selassie)",
+          "subcityZone": "West Tigray",
+          "woreda": "shire",
+          "houseNumber": "new"
+        }
+      ],
+      "businessId": "67fce4593b104e7ea8d05ae2"
+    }
+  ],
+  "userAccountInformation": {
+    "preferredLanguage": "EN",
+    "status": "ACTIVE",
+    "currentStage": "OFFER_REQUESTED",
+    "loanProductCode": "SML",
+    "loanStatus": "ACTIVE"
+  },
+  "verification": {
+    "phone": true
+  },
+  "createdDate": 1718273821,
+  "updatedDate": 1757323079,
+  "requestId": "c41c8a4b-4bd3-4f90-b640-f7c2c9a12b7c",
+  "deviceToken": "f1c41E9FRpWxlflEumFJbU:APA91bHhAeb5M4q6erXmBQD1W9Goumzf29_ejRslfaVfIHIXCeiCpeTPM_52zE284YTDHy6Xwdd9VNUa5NhePTa8yRPYn3jPlvL3QB4b0ROhxZpjhIQ6dbw",
+  "birthDate": 863125200,
+  "emergencyContactName": "Semaynesh Fishaye",
+  "emergencyContactPhone": "+251920744379",
+  "fullName": "Danayt Yrga Berhe",
+  "gender": "FEMALE",
+  "idNumber": "6063030",
+  "idType": "PASSPORT",
+  "documents": [
+    {
+      "id": "67fce4523b104e7ea8d05adf",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/666ac71d20160be6be5f16c9/document/67fce4523b104e7ea8d05adf",
+      "status": "FAILED",
+      "uploadedDate": "2025-04-14"
+    },
+    {
+      "id": "67fce4543b104e7ea8d05ae0",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/666ac71d20160be6be5f16c9/document/67fce4543b104e7ea8d05ae0",
+      "status": "VERIFIED",
+      "uploadedDate": "2025-04-14"
+    },
+    {
+      "id": "67fce4583b104e7ea8d05ae1",
+      "type": "OTHERS",
+      "extension": "pdf",
+      "url": "/customer/666ac71d20160be6be5f16c9/document/67fce4583b104e7ea8d05ae1",
+      "status": "VERIFIED",
+      "uploadedDate": "2025-04-14"
+    },
+    {
+      "id": "6895e5e211c7905c2ce4fe1c",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/666ac71d20160be6be5f16c9/document/6895e5e211c7905c2ce4fe1c",
+      "status": "VERIFIED",
+      "uploadedDate": "2025-08-08"
+    }
+  ],
+  "tinNumber": "0095627578",
+  "assignedOfficer": {
+    "id": "6662b4fb52c50d3045dfef9a",
+    "name": "Alexander Hadgu Girmay"
+  }
+},
+{
+  "_id": "666c52cdd4818110349fc22c",
+  "phone": "+251919526695",
+  "personalAddresses": [
+    {
+      "region": "ADDIS_ABABA",
+      "city": "Addis Ababa (City)",
+      "subcityZone": "Arada",
+      "woreda": "09",
+      "houseNumber": "new",
+      "createdDate": 1733737431
+    }
+  ],
+  "bankInformations": [
+    {
+      "accountNumber": "0081197930102",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": true,
+      "customerNumber": "0081197900000",
+      "additionalInformation": {
+        "accountNo": "0081197930102",
+        "customerId": "0081197900000",
+        "name": "BIRHANU BELAY ZEGEYE",
+        "branchId": "024",
+        "status": "ACTIVE",
+        "mobile": "0919526695",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2022-01-22T03:00"
+      }
+    }
+  ],
+  "educationalLevels": [
+    {
+      "level": "BACHELOR_DEGREE",
+      "startDate": 0,
+      "endDate": 0,
+      "school": "",
+      "updatedDate": 1733737431
+    }
+  ],
+  "maritalStatuses": [
+    "UNMARRIED"
+  ],
+  "loanInformations": [
+    {
+      "loanProductId": "3b943e19-d112-4cf4-8b7a-c49715f405dc",
+      "loanProductCode": "EFWA",
+      "loanProductName": "Wase"
+    }
+  ],
+  "businesses": [
+    {
+      "tin": "0079122627",
+      "businessLicenseNumber": null,
+      "tinOfSpouse": null,
+      "businessName": "",
+      "managerTinNumber": "",
+      "businessSector": "AGRICULTURE",
+      "associationType": "INDIVIDUAL",
+      "formOfBusiness": "GROWING",
+      "lineOfBusiness": "Poultry",
+      "businessRegisteredDate": 1751230800,
+      "numberOfEmployees": 8,
+      "startingNumberOfEmployees": 5,
+      "sourceOfInitialCapital": "OWN",
+      "startingCapital": 50000,
+      "currentCapital": 2000000,
+      "annualSalesIncome": 2000058,
+      "annualProfit": 1250000,
+      "businessRenewalDate": null,
+      "additionalInformation": null,
+      "businessAddresses": [
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Bole",
+          "woreda": "03",
+          "houseNumber": "new"
+        }
+      ],
+      "businessId": "6863c7e6bcd98078c879b435"
+    }
+  ],
+  "userAccountInformation": {
+    "preferredLanguage": "EN",
+    "status": "ACTIVE",
+    "currentStage": "OFFER_REQUESTED",
+    "loanStatus": "ACTIVE",
+    "loanProductCode": "MML"
+  },
+  "verification": {
+    "phone": true
+  },
+  "createdDate": 1718375117,
+  "updatedDate": 1758634368,
+  "deviceToken": "fPxUuPIMSAa1XbbtrCi9tF:APA91bHqvsbI1gihBIG9ScSznYFxO2kHj6HLR-K8CB7WPO4m2SZIOluVfR8ALKj3zUNQ1WqUuoHs5dHPyD8oRdX5GLJGrOGO7XNnVmyEhvqsNit9AsL0_d4",
+  "birthDate": 938034000,
+  "emergencyContactName": "bbi",
+  "emergencyContactPhone": "+251991843509",
+  "fullName": "Birhanu Belay Zegeye",
+  "gender": "MALE",
+  "idNumber": "6216/22",
+  "idType": "KEBELE_ID",
+  "tinNumber": "0079122627",
+  "documents": [
+    {
+      "id": "6863e4dd76f7ae1a02407c47",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/666c52cdd4818110349fc22c/document/6863e4dd76f7ae1a02407c47",
+      "status": "VERIFIED",
+      "uploadedDate": "2025-07-01"
+    },
+    {
+      "id": "6863e4ddbcd98078c879b4f8",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/666c52cdd4818110349fc22c/document/6863e4ddbcd98078c879b4f8",
+      "status": "EXPIRED",
+      "uploadedDate": "2025-07-01"
+    },
+    {
+      "id": "6863e4debcd98078c879b4f9",
+      "type": "OTHERS",
+      "extension": "pdf",
+      "url": "/customer/666c52cdd4818110349fc22c/document/6863e4debcd98078c879b4f9",
+      "status": "VERIFIED",
+      "uploadedDate": "2025-07-01"
+    },
+    {
+      "id": "6888a13bd500a747042ddcb6",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/666c52cdd4818110349fc22c/document/6888a13bd500a747042ddcb6",
+      "status": "VERIFIED",
+      "uploadedDate": "2025-07-29"
+    }
+  ],
+  "assignedOfficer": {
+    "id": "6662b4b7239d67a6dff62759",
+    "name": "Temesgen Tewelebrhan Gebrewubet"
+  },
+  "requestId": "a9eb7ecd-ab76-4c69-969b-7e73f0bf5642"
+},
+{
+  "_id": "666dca61b96c8dca1a0f9176",
+  "phone": "+251910346051",
+  "personalAddresses": [
+    {
+      "region": "SNNP",
+      "city": "Boditi",
+      "subcityZone": "Wolayita",
+      "woreda": "Boditi",
+      "houseNumber": "112",
+      "createdDate": 1747385003
+    }
+  ],
+  "bankInformations": [
+    {
+      "accountNumber": "0937703030101",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": true,
+      "customerNumber": "0937703000000",
+      "additionalInformation": {
+        "accountNo": "0937703030101",
+        "customerId": "0937703000000",
+        "name": "WONDIMAGEGN YASIN GETA",
+        "branchId": "122",
+        "status": "ACTIVE",
+        "mobile": "0910346051",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2022-11-12T08:00"
+      }
+    }
+  ],
+  "educationalLevels": [
+    {
+      "level": "BACHELOR_DEGREE",
+      "startDate": 0,
+      "endDate": 0,
+      "school": "",
+      "updatedDate": 1747385003
+    }
+  ],
+  "maritalStatuses": [
+    "UNMARRIED"
+  ],
+  "loanInformations": [
+    {
+      "loanProductId": "89e37d33-3f26-4c93-bee9-152a8e05c1c5",
+      "loanProductCode": "NSL",
+      "loanProductName": "Nano Loan (Safee)"
+    }
+  ],
+  "businesses": [
+    {
+      "tin": "0080292370",
+      "businessLicenseNumber": null,
+      "tinOfSpouse": null,
+      "businessName": "",
+      "managerTinNumber": "",
+      "businessSector": "DOMESTIC_TRADE_SERVICE",
+      "associationType": "INDIVIDUAL",
+      "formOfBusiness": "STARTUP",
+      "lineOfBusiness": "Barber Shop",
+      "businessRegisteredDate": 1657573200,
+      "numberOfEmployees": 15,
+      "startingNumberOfEmployees": 5,
+      "sourceOfInitialCapital": "FAMILY",
+      "startingCapital": 100000,
+      "currentCapital": 1000000,
+      "annualSalesIncome": 10000000,
+      "annualProfit": 300000,
+      "businessRenewalDate": null,
+      "additionalInformation": null,
+      "businessAddresses": [
+        {
+          "region": "SNNP",
+          "city": "Areka",
+          "subcityZone": "Wolayita",
+          "woreda": "Damot sore",
+          "houseNumber": "122",
+          "createdDate": 1732715558
+        },
+        {
+          "region": "SNNP",
+          "city": "Areka",
+          "subcityZone": "Wolayita",
+          "woreda": "Damot sore",
+          "houseNumber": "122",
+          "createdDate": 1732715558
+        },
+        {
+          "region": "SNNP",
+          "city": "Areka",
+          "subcityZone": "Wolayita",
+          "woreda": "Damot sore",
+          "houseNumber": "122",
+          "createdDate": 1732715558
+        },
+        {
+          "region": "SNNP",
+          "city": "Areka",
+          "subcityZone": "Wolayita",
+          "woreda": "Damot sore",
+          "houseNumber": "122",
+          "createdDate": 1732715558
+        },
+        {
+          "region": "SNNP",
+          "city": "Areka",
+          "subcityZone": "Wolayita",
+          "woreda": "Damot sore",
+          "houseNumber": "122"
+        }
+      ],
+      "businessId": "666fe82ad4818110349fc26e"
+    }
+  ],
+  "userAccountInformation": {
+    "preferredLanguage": "EN",
+    "status": "ACTIVE",
+    "currentStage": "OFFER_REJECTED"
+  },
+  "verification": {
+    "phone": true
+  },
+  "createdDate": 1718471265,
+  "updatedDate": 1747385003,
+  "deviceToken": "f7-8xEhmQDKlZ1NUDlu7QW:APA91bEhliRNyBzAmtYxHe_h98ABcvgvR8lSPgzo8oOdg8_Pb4-wiqp9Ru42_ECumSFyn_1EJ47xMwpIcw6OQ8ZwHbxy-fMPCYMt5sp01LNVlelU3WbNME0",
+  "birthDate": 877035600,
+  "emergencyContactName": "Yasin",
+  "emergencyContactPhone": "+251924300895",
+  "fullName": "Wondimagegn Yasin Geta",
+  "gender": "MALE",
+  "idNumber": "5564",
+  "idType": "KEBELE_ID",
+  "tinNumber": "0080292370",
+  "documents": [
+    {
+      "id": "66729119b96c8dca1a0f91ee",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/666dca61b96c8dca1a0f9176/document/66729119b96c8dca1a0f91ee",
+      "status": "PENDING",
+      "uploadedDate": "2024-06-19"
+    },
+    {
+      "id": "6672914eb96c8dca1a0f91ef",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/666dca61b96c8dca1a0f9176/document/6672914eb96c8dca1a0f91ef",
+      "status": "PENDING",
+      "uploadedDate": "2024-06-19"
+    },
+    {
+      "id": "66729154b96c8dca1a0f91f0",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/666dca61b96c8dca1a0f9176/document/66729154b96c8dca1a0f91f0",
+      "status": "FAILED",
+      "uploadedDate": "2024-06-19"
+    },
+    {
+      "id": "674724523f3440fabe898e14",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/666dca61b96c8dca1a0f9176/document/674724523f3440fabe898e14",
+      "status": "PENDING",
+      "uploadedDate": "2024-11-27"
+    }
+  ],
+  "assignedOfficer": {
+    "id": "6662af2652c50d3045dfef98",
+    "name": "Kaleab Sebehatleab  Sahlu"
+  },
+  "requestId": "57fa946c-cbfb-421e-9b11-e206dd7f5d07"
+},
+{
+  "_id": "666fd405d4818110349fc267",
+  "phone": "+251911533506",
+  "personalAddresses": [
+    {
+      "region": "ADDIS_ABABA",
+      "city": "Addis Ababa (City)",
+      "subcityZone": "Yeka",
+      "woreda": "7",
+      "houseNumber": "09/159",
+      "createdDate": 1747222710
+    }
+  ],
+  "bankInformations": [
+    {
+      "accountNumber": "0766243830101",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": true,
+      "customerNumber": "0766243800000",
+      "additionalInformation": {
+        "accountNo": "0766243830101",
+        "customerId": "0766243800000",
+        "name": "SOLOMON HAILU G/MARIAM",
+        "branchId": "314",
+        "status": "ACTIVE",
+        "mobile": "0911533506",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2019-02-07T03:00"
+      }
+    }
+  ],
+  "educationalLevels": [
+    {
+      "level": "BACHELOR_DEGREE",
+      "startDate": 0,
+      "endDate": 0,
+      "school": "",
+      "updatedDate": 1747222710
+    }
+  ],
+  "maritalStatuses": [
+    "UNMARRIED"
+  ],
+  "loanInformations": [
+    {
+      "loanProductId": "3b943e19-d112-4cf4-8b7a-c49715f405dc",
+      "loanProductCode": "EFWA",
+      "loanProductName": "Wase"
+    }
+  ],
+  "businesses": [
+    {
+      "tin": "0024261982",
+      "businessLicenseNumber": null,
+      "tinOfSpouse": null,
+      "businessName": "",
+      "managerTinNumber": "",
+      "businessSector": "DOMESTIC_TRADE_SERVICE",
+      "associationType": "INDIVIDUAL",
+      "formOfBusiness": "GROWING",
+      "lineOfBusiness": "Transport service",
+      "businessRegisteredDate": 1700082000,
+      "numberOfEmployees": 3,
+      "startingNumberOfEmployees": 1,
+      "sourceOfInitialCapital": "OWN",
+      "startingCapital": 318631,
+      "currentCapital": 1800000,
+      "annualSalesIncome": 850000,
+      "annualProfit": 650000,
+      "businessRenewalDate": null,
+      "additionalInformation": null,
+      "businessAddresses": [
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Bole",
+          "woreda": "04",
+          "houseNumber": "na"
+        }
+      ],
+      "businessId": "68a46f7d9d0e3b3bdd8f0e90"
+    }
+  ],
+  "userAccountInformation": {
+    "preferredLanguage": "EN",
+    "status": "ACTIVE",
+    "currentStage": "OFFER_REQUESTED",
+    "loanStatus": "ACTIVE",
+    "loanProductCode": "MML"
+  },
+  "verification": {
+    "phone": true
+  },
+  "createdDate": 1718604805,
+  "updatedDate": 1758173700,
+  "deviceToken": "cCqOuqErQ5CzAYI9odeBpJ:APA91bEJ0lsDnWk72W8U9gaQ5I_e-UyDBXJWw3yjCUNmX4tW4Qk1_-4IRiG4Pt9dRoWy92nGczuQ1HvDuXW2DXZ6eYd4bU_z0O1qDYoGFG0sBCjyJGyjLPM",
+  "birthDate": -100666800,
+  "emergencyContactName": "Tsige hailu",
+  "emergencyContactPhone": "+251911449430",
+  "fullName": "Solomon Hailu Gmariam",
+  "gender": "MALE",
+  "idNumber": "YE/W06/01560125",
+  "idType": "KEBELE_ID",
+  "tinNumber": "0024261982",
+  "documents": [
+    {
+      "id": "68a46ffac8acf1293e524dd8",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/666fd405d4818110349fc267/document/68a46ffac8acf1293e524dd8",
+      "status": "VERIFIED",
+      "uploadedDate": "2025-08-19"
+    },
+    {
+      "id": "68a46ffd2b631e86296f3817",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/666fd405d4818110349fc267/document/68a46ffd2b631e86296f3817",
+      "status": "VERIFIED",
+      "uploadedDate": "2025-08-19"
+    },
+    {
+      "id": "68a470049d0e3b3bdd8f0e94",
+      "type": "OTHERS",
+      "extension": "pdf",
+      "url": "/customer/666fd405d4818110349fc267/document/68a470049d0e3b3bdd8f0e94",
+      "status": "VERIFIED",
+      "uploadedDate": "2025-08-19"
+    }
+  ],
+  "assignedOfficer": {
+    "id": "6662adab0af0ff02483a6bc0",
+    "name": "Adelegn Lijakal Giza"
+  }
+},
+{
+  "_id": "66716f94d4818110349fc286",
+  "phone": "+251910591310",
+  "personalAddresses": [
+    {
+      "region": "ADDIS_ABABA",
+      "city": "Addis Ababa (City)",
+      "subcityZone": "Nefas Silk Lafto",
+      "woreda": "02",
+      "houseNumber": "new",
+      "createdDate": 1733927365
+    }
+  ],
+  "bankInformations": [
+    {
+      "accountNumber": "0734308030101",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": true,
+      "customerNumber": "0734308000000",
+      "additionalInformation": {
+        "accountNo": "0734308030101",
+        "customerId": "0734308000000",
+        "name": "YIRGALEM  KIDANIE  GEBEREMARIAM",
+        "branchId": "019",
+        "status": "ACTIVE",
+        "mobile": "0910591310",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2018-03-16T07:00"
+      }
+    }
+  ],
+  "educationalLevels": [
+    {
+      "level": "BACHELOR_DEGREE",
+      "startDate": 0,
+      "endDate": 0,
+      "school": "",
+      "updatedDate": 1733927365
+    }
+  ],
+  "maritalStatuses": [
+    "MARRIED"
+  ],
+  "loanInformations": [
+    {
+      "loanProductId": "3b943e19-d112-4cf4-8b7a-c49715f405dc",
+      "loanProductCode": "EFWA",
+      "loanProductName": "Wase"
+    }
+  ],
+  "businesses": [
+    {
+      "tin": "0054427058",
+      "businessLicenseNumber": null,
+      "tinOfSpouse": null,
+      "businessName": "",
+      "managerTinNumber": "",
+      "businessSector": "DOMESTIC_TRADE_SERVICE",
+      "associationType": "INDIVIDUAL",
+      "formOfBusiness": "GROWING",
+      "lineOfBusiness": "Car Rentals",
+      "businessRegisteredDate": 1602622800,
+      "numberOfEmployees": 1,
+      "startingNumberOfEmployees": 1,
+      "sourceOfInitialCapital": "OWN",
+      "startingCapital": 800000,
+      "currentCapital": 6000000,
+      "annualSalesIncome": 600000,
+      "annualProfit": 200000,
+      "businessRenewalDate": null,
+      "additionalInformation": null,
+      "businessAddresses": [
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Nefas Silk Lafto",
+          "woreda": "02",
+          "houseNumber": "New",
+          "createdDate": 1738925765
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Nefas Silk Lafto",
+          "woreda": "02",
+          "houseNumber": "New"
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Nefas Silk Lafto",
+          "woreda": "02",
+          "houseNumber": "New"
+        }
+      ],
+      "businessId": "67a5cd67468fc410f95c4f70"
+    }
+  ],
+  "userAccountInformation": {
+    "preferredLanguage": "EN",
+    "status": "ACTIVE",
+    "currentStage": "DOCUMENT_REJECTED",
+    "loanStatus": "CLOSED",
+    "loanProductCode": "SML"
+  },
+  "verification": {
+    "phone": true
+  },
+  "createdDate": 1718710164,
+  "updatedDate": 1758003207,
+  "deviceToken": "dRSI45LXQx2sGW0r7KWmtS:APA91bHrfgPGQL_y0z90R_aEFydO824s-M_8nKIe-IO39wWPmMrRS7VP0jQg7stN-kHoHq_LxaT28e8_ohnOL-sOORZPpFkc08IK-Y3wAvdVvsXOuw1Wjgk",
+  "birthDate": 1062622800,
+  "emergencyContactName": "abissinya",
+  "emergencyContactPhone": "+251913762704",
+  "fullName": "Yirgalem Kidanie Geberemariam",
+  "gender": "FEMALE",
+  "idNumber": "00909006",
+  "idType": "KEBELE_ID",
+  "tinNumber": "0054427058",
+  "documents": [
+    {
+      "id": "67a5ea5a468fc410f95c4f9d",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/67a5ea5a468fc410f95c4f9d",
+      "status": "PENDING",
+      "uploadedDate": "2025-02-07"
+    },
+    {
+      "id": "67a6042ab84b7149124be1aa",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/67a6042ab84b7149124be1aa",
+      "status": "EXPIRED",
+      "uploadedDate": "2025-02-07"
+    },
+    {
+      "id": "67a60431468fc410f95c4fea",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/67a60431468fc410f95c4fea",
+      "status": "FAILED",
+      "uploadedDate": "2025-02-07"
+    },
+    {
+      "id": "67ab5579f06c2ee604c978e1",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/67ab5579f06c2ee604c978e1",
+      "status": "FAILED",
+      "uploadedDate": "2025-02-11"
+    },
+    {
+      "id": "67ab5585cda319c83a44abeb",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/67ab5585cda319c83a44abeb",
+      "status": "FAILED",
+      "uploadedDate": "2025-02-11"
+    },
+    {
+      "id": "67af1f62cda319c83a44b9e2",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/67af1f62cda319c83a44b9e2",
+      "status": "EXPIRED",
+      "uploadedDate": "2025-02-14"
+    },
+    {
+      "id": "688dd9a911c7905c2ce4e6fd",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/688dd9a911c7905c2ce4e6fd",
+      "status": "FAILED",
+      "uploadedDate": "2025-08-02"
+    },
+    {
+      "id": "688dd9a911c7905c2ce4e6fe",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/688dd9a911c7905c2ce4e6fe",
+      "status": "EXPIRED",
+      "uploadedDate": "2025-08-02"
+    },
+    {
+      "id": "689057b8762035e3b07eb9a7",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/689057b8762035e3b07eb9a7",
+      "status": "FAILED",
+      "uploadedDate": "2025-08-04"
+    },
+    {
+      "id": "689057b9762035e3b07eb9a8",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/689057b9762035e3b07eb9a8",
+      "status": "EXPIRED",
+      "uploadedDate": "2025-08-04"
+    },
+    {
+      "id": "68905ce0dfb75c1c18e0bf94",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/68905ce0dfb75c1c18e0bf94",
+      "status": "VERIFIED",
+      "uploadedDate": "2025-08-04"
+    },
+    {
+      "id": "68905ce111c7905c2ce4e993",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/66716f94d4818110349fc286/document/68905ce111c7905c2ce4e993",
+      "status": "EXPIRED",
+      "uploadedDate": "2025-08-04"
+    }
+  ],
+  "assignedOfficer": {
+    "id": "6662b4fb52c50d3045dfef9a",
+    "name": "Alexander Hadgu Girmay"
+  },
+  "requestId": "e791e646-8651-4d10-9e7b-e2cf6239771c"
+},
+{
+  "_id": "6673ec2fb96c8dca1a0f9217",
+  "phone": "+251921000129",
+  "personalAddresses": [
+    {
+      "region": "ADDIS_ABABA",
+      "city": "Addis Ababa (City)",
+      "subcityZone": "Yeka",
+      "woreda": "12",
+      "houseNumber": "03/3/725",
+      "createdDate": 1755159300
+    }
+  ],
+  "bankInformations": [
+    {
+      "accountNumber": "0737412830101",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": true,
+      "customerNumber": "0737412800000",
+      "additionalInformation": {
+        "accountNo": "0737412830101",
+        "customerId": "0737412800000",
+        "name": "BITAW ABIE ZELEKE",
+        "branchId": "113",
+        "status": "ACTIVE",
+        "mobile": "0921000129",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2018-04-23T07:00"
+      }
+    }
+  ],
+  "educationalLevels": [
+    {
+      "level": "MASTERS_DEGREE",
+      "startDate": 0,
+      "endDate": 0,
+      "school": "",
+      "updatedDate": 1755159300
+    }
+  ],
+  "maritalStatuses": [
+    "UNMARRIED"
+  ],
+  "loanInformations": [
+    {
+      "loanProductId": "3b943e19-d112-4cf4-8b7a-c49715f405dc",
+      "loanProductCode": "EFWA",
+      "loanProductName": "Wase"
+    }
+  ],
+  "businesses": [
+    {
+      "tin": "0056583584",
+      "businessLicenseNumber": null,
+      "tinOfSpouse": null,
+      "businessName": "",
+      "managerTinNumber": "",
+      "businessSector": "DOMESTIC_TRADE_SERVICE",
+      "associationType": "INDIVIDUAL",
+      "formOfBusiness": "GROWING",
+      "lineOfBusiness": "Juice House",
+      "businessRegisteredDate": 1022619600,
+      "numberOfEmployees": 3,
+      "startingNumberOfEmployees": 5,
+      "sourceOfInitialCapital": "OWN",
+      "startingCapital": 200000,
+      "currentCapital": 600000,
+      "annualSalesIncome": 300000,
+      "annualProfit": 150000,
+      "businessRenewalDate": null,
+      "additionalInformation": null,
+      "businessAddresses": [
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new",
+          "createdDate": 1755159398
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new",
+          "createdDate": 1755159398
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new",
+          "createdDate": 1755159398
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new",
+          "createdDate": 1755159398
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new",
+          "createdDate": 1755159398
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new",
+          "createdDate": 1755159398
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new",
+          "createdDate": 1755159398
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new",
+          "createdDate": 1755159398
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new",
+          "createdDate": 1755159398
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new",
+          "createdDate": 1755159398
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Yeka",
+          "woreda": "05",
+          "houseNumber": "new"
+        }
+      ],
+      "businessId": "66c88442c872082b04471161"
+    }
+  ],
+  "userAccountInformation": {
+    "preferredLanguage": "EN",
+    "status": "ACTIVE",
+    "currentStage": "OFFER_REQUEST",
+    "loanProductCode": "MML",
+    "loanStatus": "REJECTED_BY_CUSTOMER"
+  },
+  "verification": {
+    "phone": true
+  },
+  "createdDate": 1718873135,
+  "updatedDate": 1757500771,
+  "deviceToken": "deuqkA2_TYi6ce7UpAsPLl:APA91bF-PVvsyphpjVz4jdsAPVTtT4Yh-lxgsAW8SH8L5fdvt4Z87WUDzuZHjpgfJyPfZ2k8lHMEQgCRkw5VcYtuev9f0oFvr9YhCek-hFN-DpuaqPDqPH0",
+  "birthDate": 770850000,
+  "emergencyContactName": "Assefa Agumas",
+  "emergencyContactPhone": "+251930869220",
+  "fullName": "Bitaw Abie Zeleke",
+  "gender": "MALE",
+  "idNumber": "ID/YE/W12/01394",
+  "idType": "KEBELE_ID",
+  "tinNumber": "0056583584",
+  "documents": [
+    {
+      "id": "6721eb4bd36b29f28493f44e",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/6673ec2fb96c8dca1a0f9217/document/6721eb4bd36b29f28493f44e",
+      "status": "PENDING",
+      "uploadedDate": "2024-10-30"
+    },
+    {
+      "id": "6721eb5343d75b91cfdea7d8",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/6673ec2fb96c8dca1a0f9217/document/6721eb5343d75b91cfdea7d8",
+      "status": "PENDING",
+      "uploadedDate": "2024-10-30"
+    },
+    {
+      "id": "6721ee07d36b29f28493f460",
+      "type": "OTHERS",
+      "extension": "pdf",
+      "url": "/customer/6673ec2fb96c8dca1a0f9217/document/6721ee07d36b29f28493f460",
+      "status": "PENDING",
+      "uploadedDate": "2024-10-30"
+    }
+  ],
+  "requestId": "b2ee1cf8-1622-424b-b86a-e015611e7eb1"
+},
+{
+  "_id": "6676923bb96c8dca1a0f9259",
+  "phone": "+251935349996",
+  "personalAddresses": [
+    {
+      "region": "TIGRAY",
+      "city": "መቀሌ",
+      "subcityZone": "Central Tigray",
+      "woreda": "ሰሜን",
+      "houseNumber": "02",
+      "createdDate": 1724060413
+    }
+  ],
+  "bankInformations": [
+    {
+      "accountNumber": "0951695330101",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": true,
+      "customerNumber": "0951695300000",
+      "additionalInformation": {
+        "accountNo": "0951695330101",
+        "customerId": "0951695300000",
+        "name": "GIRMAY TESFU BELAY",
+        "branchId": "",
+        "status": "ACTIVE",
+        "mobile": "0914419593",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2022-04-07T07:00"
+      }
+    }
+  ],
+  "educationalLevels": [
+    {
+      "level": "PRIMARY",
+      "startDate": 0,
+      "endDate": 0,
+      "school": "",
+      "updatedDate": 1724060413
+    }
+  ],
+  "maritalStatuses": [
+    "UNMARRIED"
+  ],
+  "loanInformations": [
+    {
+      "loanProductId": "3b943e19-d112-4cf4-8b7a-c49715f405dc",
+      "loanProductCode": "EFWA",
+      "loanProductName": "Wase"
+    }
+  ],
+  "businesses": [
+    {
+      "tin": "0090125528",
+      "businessLicenseNumber": null,
+      "tinOfSpouse": null,
+      "businessName": "",
+      "managerTinNumber": "",
+      "businessSector": "DOMESTIC_TRADE_SERVICE",
+      "associationType": "INDIVIDUAL",
+      "formOfBusiness": "STARTUP",
+      "lineOfBusiness": "ሱቅ",
+      "businessRegisteredDate": 750978000,
+      "numberOfEmployees": 1,
+      "startingNumberOfEmployees": 1,
+      "sourceOfInitialCapital": "LOAN",
+      "startingCapital": 5000,
+      "currentCapital": 50000,
+      "annualSalesIncome": 100000,
+      "annualProfit": 10000,
+      "businessRenewalDate": null,
+      "additionalInformation": null,
+      "businessAddresses": [
+        {
+          "region": "TIGRAY",
+          "city": "መቀሌ",
+          "subcityZone": "Central Tigray",
+          "woreda": "07",
+          "houseNumber": "1221",
+          "createdDate": 1724060433
+        },
+        {
+          "region": "TIGRAY",
+          "city": "መቀሌ",
+          "subcityZone": "Central Tigray",
+          "woreda": "07",
+          "houseNumber": "1221"
+        }
+      ],
+      "businessId": "66c3127675e8e3d4a0f4f215"
+    }
+  ],
+  "userAccountInformation": {
+    "preferredLanguage": "AM",
+    "status": "ACTIVE",
+    "currentStage": "OFFER_REQUEST"
+  },
+  "verification": {
+    "phone": true
+  },
+  "createdDate": 1719046715,
+  "updatedDate": 1737696016,
+  "deviceToken": "ewS5vA0TRy-7fjQ7FfvX_O:APA91bEp26jTCOrgubJ43uOa4ztZp-JCnY38VSK38OtdGv-rzYzdua4sEYg-TNzphFUEVCUb32iAb27QxZZ_Rr_-XedVz9twg3w2vZGxb3MGZt0IbLlQJSc",
+  "birthDate": 750978000,
+  "emergencyContactName": "ተስፉ",
+  "emergencyContactPhone": "+251914012827",
+  "fullName": "Girmay Tesfu Belay",
+  "gender": "MALE",
+  "idNumber": "20029",
+  "idType": "DRIVERS_LICENSE",
+  "tinNumber": "0090125528",
+  "documents": [
+    {
+      "id": "66c312d775e8e3d4a0f4f216",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/6676923bb96c8dca1a0f9259/document/66c312d775e8e3d4a0f4f216",
+      "status": "PENDING",
+      "uploadedDate": "2024-08-19"
+    }
+  ]
+},
+{
+  "_id": "667aac8dd4818110349fc2e1",
+  "phone": "+251911103509",
+  "personalAddresses": [
+    {
+      "region": "ADDIS_ABABA",
+      "city": "Addis Ababa (City)",
+      "subcityZone": "Lami Kura",
+      "woreda": "14",
+      "houseNumber": "529/07",
+      "createdDate": 1747820768
+    }
+  ],
+  "bankInformations": [
+    {
+      "accountNumber": "0042852430101",
+      "exists": true,
+      "ownerVerified": true,
+      "isPrimary": true,
+      "customerNumber": "0042852400000",
+      "additionalInformation": {
+        "accountNo": "0042852430101",
+        "customerId": "0042852400000",
+        "name": "WEGAYEHU GETACHEW ASEFA",
+        "branchId": "013",
+        "status": "ACTIVE",
+        "mobile": "0911103509",
+        "address": "",
+        "gender": "",
+        "dob": "",
+        "openingDate": "2017-02-15T08:00"
+      }
+    }
+  ],
+  "educationalLevels": [
+    {
+      "level": "BACHELOR_DEGREE",
+      "startDate": 0,
+      "endDate": 0,
+      "school": "",
+      "updatedDate": 1747820768
+    }
+  ],
+  "maritalStatuses": [
+    "MARRIED"
+  ],
+  "loanInformations": [
+    {
+      "loanProductId": "3b943e19-d112-4cf4-8b7a-c49715f405dc",
+      "loanProductCode": "EFWA",
+      "loanProductName": "Wase"
+    }
+  ],
+  "businesses": [
+    {
+      "tin": "0007166764",
+      "businessLicenseNumber": null,
+      "tinOfSpouse": null,
+      "businessName": "",
+      "managerTinNumber": "",
+      "businessSector": "DOMESTIC_TRADE_SERVICE",
+      "associationType": "INDIVIDUAL",
+      "formOfBusiness": "STARTUP",
+      "lineOfBusiness": "Small Shops",
+      "businessRegisteredDate": 1745355600,
+      "numberOfEmployees": 2,
+      "startingNumberOfEmployees": 3,
+      "sourceOfInitialCapital": "FUND",
+      "startingCapital": 30000,
+      "currentCapital": 2000000,
+      "annualSalesIncome": 800000,
+      "annualProfit": 400000,
+      "businessRenewalDate": null,
+      "additionalInformation": null,
+      "businessAddresses": [
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Lami Kura",
+          "woreda": "14",
+          "houseNumber": "new",
+          "createdDate": 1747820782
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Lami Kura",
+          "woreda": "14",
+          "houseNumber": "new",
+          "createdDate": 1747820782
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Lami Kura",
+          "woreda": "14",
+          "houseNumber": "new",
+          "createdDate": 1747820782
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Lami Kura",
+          "woreda": "14",
+          "houseNumber": "new",
+          "createdDate": 1747820782
+        },
+        {
+          "region": "ADDIS_ABABA",
+          "city": "Addis Ababa (City)",
+          "subcityZone": "Lami Kura",
+          "woreda": "14",
+          "houseNumber": "new"
+        }
+      ],
+      "businessId": "682c5fa9cafeaf5fbb18a678"
+    }
+  ],
+  "userAccountInformation": {
+    "preferredLanguage": "EN",
+    "status": "ACTIVE",
+    "currentStage": "DOCUMENT_REJECTED",
+    "loanProductCode": "MML",
+    "loanStatus": "REJECTED_BY_OFFICER"
+  },
+  "verification": {
+    "phone": true
+  },
+  "createdDate": 1719315597,
+  "updatedDate": 1757091435,
+  "deviceToken": "c3-WgcMWQQKpXBs9Z3CRel:APA91bESsaW5FxLh5DvxrAgaf7xiK9JCUrKgko8NkGSnk4gwNlnEbjTj-ZMKzAlBXcjss_W3u1O0XzcTmDJsS2CBxD15z9HISeCsJTty_vSUtoeVGOgnm9w",
+  "birthDate": 311893200,
+  "emergencyContactName": "zinash",
+  "emergencyContactPhone": "+251945254625",
+  "fullName": "Wegayehu Getachew Asefa",
+  "gender": "MALE",
+  "idNumber": "7/264/3",
+  "idType": "KEBELE_ID",
+  "requestId": "f8e1d7a5-bbb5-43aa-bdc7-9e80964e0e33",
+  "tinNumber": "0007166764",
+  "documents": [
+    {
+      "id": "682c60769f5fcfa3c5e3dd80",
+      "type": "ID",
+      "extension": "pdf",
+      "url": "/customer/667aac8dd4818110349fc2e1/document/682c60769f5fcfa3c5e3dd80",
+      "status": "PENDING",
+      "uploadedDate": "2025-05-20"
+    },
+    {
+      "id": "682c60776c3dfa02cbd0830a",
+      "type": "TRADE_LICENCE",
+      "extension": "pdf",
+      "url": "/customer/667aac8dd4818110349fc2e1/document/682c60776c3dfa02cbd0830a",
+      "status": "FAILED",
+      "uploadedDate": "2025-05-20"
+    },
+    {
+      "id": "682c6078cafeaf5fbb18a679",
+      "type": "OTHERS",
+      "extension": "pdf",
+      "url": "/customer/667aac8dd4818110349fc2e1/document/682c6078cafeaf5fbb18a679",
+      "status": "PENDING",
+      "uploadedDate": "2025-05-20"
+    }
+  ],
+  "assignedOfficer": {
+    "id": "6662b47c52c50d3045dfef99",
+    "name": "Tsion Endalamaw Lakew"
+  }
+}]
