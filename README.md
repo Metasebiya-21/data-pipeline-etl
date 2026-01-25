@@ -1,57 +1,107 @@
-# MongoDB to Oracle Airflow Pipeline
+# MongoDB to Oracle Airflow ETL
 
-This project scaffolds an Apache Airflow (Docker) pipeline that incrementally syncs MongoDB documents to Oracle and listens briefly to change streams for update/delete events.
+This project runs an Apache Airflow pipeline (Docker) that syncs MongoDB customer documents into an Oracle relational schema. It supports incremental loads, short change stream polling, and one-time full loads.
 
 ## What is included
-- Airflow Docker Compose stack (webserver, scheduler, metadata DB)
-- Incremental extract + change stream capture
-- Oracle upsert + delete logic
-- Pydantic settings loading from `.env`
+- Docker Compose stack for Airflow + Postgres metadata DB + Oracle Free
+- Incremental MongoDB extraction with change streams
+- Full relational load into Oracle `REPORT_ETL` schema
+- Pydantic settings loaded from `.env`
+- Detailed docs in `docs/`
 
 ## Prerequisites
 - Docker
 - MongoDB replica set (required for change streams)
-- Oracle database reachable from the Airflow containers
-- If setup with docker make sure all containers are running on the same docker network
+- Oracle reachable from the Airflow containers (local container included)
+- All containers on the same Docker network
+
+## Project layout
+- `dags/mongo_oracle_etl.py`: main ETL DAG
+- `src/customer_etl.py`: transforms Mongo docs into Oracle rows
+- `db/report_etl_schema.sql`: Oracle schema definition
+- `db/oracle-init/01_create_report_etl.sh`: Oracle init script
+- `docs/mongo_oracle_etl.md`: DAG walkthrough
+- `docs/customer_etl.md`: mapping walkthrough
 
 ## Quick start
-1. Update `.env` with your MongoDB and Oracle settings.
-2. Start Airflow:
+1. Update `.env` with MongoDB and Oracle settings.
+2. Build and start services:
 
 ```bash
-docker compose up airflow-init
-docker compose up -d
+docker compose up --build -d
 ```
 
-3. Open Airflow at `http://localhost:8080` and enable the DAG `mongo_to_oracle_incremental`.
+3. Open Airflow at `http://localhost:8080` and enable the DAG `mongo_oracle_etl`.
 
-## Oracle table expectation
-Create a target table with an ID, JSON payload, and updated timestamp:
+## Oracle setup
 
-```sql
-CREATE TABLE MONGO_ITEMS (
-  ID VARCHAR2(64) PRIMARY KEY,
-  DOC_JSON CLOB,
-  UPDATED_AT VARCHAR2(64)
-);
+### Oracle container
+The compose file includes an Oracle Free container. Default DSN for the Airflow container is:
+
+```
+oracle:1521/FREEPDB1
 ```
 
-## Oracle container
-The compose file includes an Oracle Free container. Default DSN for the Airflow container is `oracle:1521/FREEPDB1`.
 If you want to use an external Oracle DB later, update `ORACLE_DSN` (or use `ORACLE_DSN_EXTERNAL` as a reference).
 
-## Report ETL schema
-The Oracle init script creates a `REPORT_ETL` schema and applies `db/report_etl_schema.sql` automatically on first start.
-## for manually creating the tables use the ff
-  - docker exec -it airflow_etl_oracle bash
-  - bash -x /container-entrypoint-initdb.d/01_create_report_etl.sh
+### REPORT_ETL schema
+On first start, the init script creates a `REPORT_ETL` schema and applies `db/report_etl_schema.sql` automatically.
 
-The `mongo_oracle_etl` DAG loads from MongoDB database `customer-management-db` and collection `customers`.
-Set `FULL_REFRESH=1` in `.env` to load all customer documents regardless of `updatedDate`/`createdDate`.
-Set `INITIAL_LOAD=1` for a one-time full load; the DAG will mark it complete via `customers_initial_load_done`.
+Manual run (inside the Oracle container):
 
+```bash
+docker exec -it airflow_etl_oracle bash
+bash -x /container-entrypoint-initdb.d/01_create_report_etl.sh
+```
+
+## MongoDB source
+The DAG loads from:
+- Database: `coop-customer-management-db`
+- Collection: `customers`
+
+These values are controlled by `MONGO_DB` and `MONGO_COLLECTION` in `.env`.
+
+## ETL behavior
+
+### Incremental extraction
+- Uses `updatedDate >= last_epoch`
+- If `updatedDate` is missing, falls back to `createdDate >= last_epoch`
+- A short change stream poll captures inserts/updates/deletes during the run
+- The cursor is stored in Airflow Variables as `customers_last_updated_epoch`
+
+### Full refresh
+Set `FULL_REFRESH=1` in `.env` to load all documents every run.
+
+### One-time initial load
+Set `INITIAL_LOAD=1` in `.env` to load all documents once. The DAG will set:
+
+```
+customers_initial_load_done=1
+```
+
+After that, it returns to incremental mode.
+
+## Verification
+
+Connect to Oracle (from host):
+
+```bash
+sqlplus report_etl/report_etl_password@localhost:1521/FREEPDB1
+```
+
+Check row counts:
+
+```sql
+SELECT COUNT(*) FROM CUSTOMERS;
+SELECT COUNT(*) FROM CUSTOMER_PERSONAL_ADDRESSES;
+SELECT COUNT(*) FROM CUSTOMER_DOCUMENTS;
+```
+
+## Troubleshooting
+- `ORA-12514`: wrong service name; use `FREEPDB1`.
+- `ORA-01017`: user not created; recreate Oracle volume or create user manually.
+- Empty loads: reset `customers_last_updated_epoch` or set `INITIAL_LOAD=1`.
 
 ## Notes
-- Incremental extraction uses `updated_at >= last_ts`. The DAG stores `last_ts` in Airflow Variables as `mongo_oracle_last_ts`.
 - Change stream listening is bounded by `CHANGE_STREAM_MAX_SECONDS` and `CHANGE_STREAM_MAX_EVENTS`.
-- Update the DAG schedule or table mapping as needed.
+- Update the DAG schedule or mapping logic as needed.
