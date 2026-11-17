@@ -1,6 +1,6 @@
 # For running scripts/initial_load.py and dbt on your laptop (outside Docker)
 pymongo==4.8.0
-snowflake-connector-python==3.12.3
+snowflake-connector-python>=4.2,<5   # dbt-snowflake 1.11 requires connector 4.x
 pydantic==2.8.2
 pydantic-settings==2.4.0
 dbt-core~=1.11.0
