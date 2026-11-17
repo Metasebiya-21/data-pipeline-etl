@@ -10,6 +10,12 @@ from snowflake.snowpark.types import FloatType, StringType
 def model(dbt, session):
     dbt.config(materialized="table", schema="linkage")
 
+    # Registering a temporary UDF uploads its code to a temporary stage in the session's
+    # current schema. The stored procedure dbt runs this model in has no current schema
+    # (the profile's base schema is never created, every model uses a custom schema),
+    # so point the session at this model's own schema, which dbt has already created.
+    session.sql(f"USE SCHEMA {dbt.this.database}.{dbt.this.schema}").collect()
+
     # Defined inside model() on purpose: dbt runs this file as a module named
     # "main_module", which does not exist in the UDF sandbox. A top-level function is
     # pickled by reference (main_module.name_similarity) and fails to load there;
