@@ -4,6 +4,8 @@ with source as (
 )
 
 select
+    source_database || ':' || customer_id                   as record_key,   -- unique across sources
+    source_database,
     customer_id,
     change_type,
     change_type = 'delete'                                   as is_delete_event,

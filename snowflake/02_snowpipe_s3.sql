@@ -24,10 +24,10 @@ CREATE STAGE IF NOT EXISTS LENDING.RAW.CUSTOMERS_S3_STAGE
 
 -- 3) The pipe: the same COPY as the Airflow task, triggered by S3 events
 CREATE PIPE IF NOT EXISTS LENDING.RAW.CUSTOMERS_PIPE AUTO_INGEST = TRUE AS
-  COPY INTO LENDING.RAW.CUSTOMERS_RAW (change_type, customer_id, doc, extracted_epoch,
+  COPY INTO LENDING.RAW.CUSTOMERS_RAW (change_type, source_database, customer_id, doc, extracted_epoch,
                                        _source_file, _source_row, _loaded_at)
   FROM (
-      SELECT $1:op::string, $1:customer_id::string, $1:doc, $1:extracted_epoch::number,
+      SELECT $1:op::string, $1:source_database::string, $1:customer_id::string, $1:doc, $1:extracted_epoch::number,
              METADATA$FILENAME, METADATA$FILE_ROW_NUMBER, CURRENT_TIMESTAMP()
       FROM @LENDING.RAW.CUSTOMERS_S3_STAGE
   );

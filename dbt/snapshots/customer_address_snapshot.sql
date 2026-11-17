@@ -2,7 +2,7 @@
 
 {{
     config(
-        unique_key='customer_id',
+        unique_key='record_key',
         strategy='check',
         check_cols=['region', 'city', 'subcity_zone', 'woreda', 'house_number'],
         invalidate_hard_deletes=True
@@ -15,6 +15,8 @@
 -- Customers that disappear (deleted in MongoDB) get their current row closed.
 
 select
+    record_key,
+    source_database,
     customer_id,
     upper(doc:personalAddresses[0]:region::string)  as region,
     doc:personalAddresses[0]:city::string           as city,

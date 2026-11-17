@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: int_records_canonical
+    description: Normalised records from all sources (names, phone last 9 digits, DOB, ID number, identity flags).
+    columns:
+      - name: record_key
+        data_tests: [unique, not_null]
+      - name: phone_9
+        data_tests:
+          - has_length_9:
+              config:
+                severity: warn
+
+  - name: int_candidate_pairs
+    description: Cross-source record pairs that share a blocking key (phone, first name + DOB, or ID number).
+    data_tests:
+      - unique_pair:
+          arguments:
+            left: left_key
+            right: right_key
+
+  - name: match_scores
+    description: Snowpark-scored candidate pairs; is_match when match_score >= 0.8.
+    columns:
+      - name: match_score
+        data_tests: [not_null]
+
+  - name: master_customer_map
+    description: One row per record with its master_key (records that matched share a master).
+    columns:
+      - name: record_key
+        data_tests: [unique, not_null]
+      - name: master_key
+        data_tests: [not_null]

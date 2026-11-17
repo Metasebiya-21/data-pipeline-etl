@@ -6,6 +6,8 @@ with latest as (
 )
 
 select
+    record_key,
+    source_database,
     customer_id,
     full_name,
     gender,

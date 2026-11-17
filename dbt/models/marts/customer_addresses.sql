@@ -1,11 +1,13 @@
 -- One row per customer address: the personalAddresses array flattened into rows.
 with latest as (
-    select customer_id, doc from {{ ref('int_customers_latest') }}
+    select record_key, source_database, customer_id, doc from {{ ref('int_customers_latest') }}
     where not is_deleted
 ),
 
 addresses as (
     select
+        latest.record_key,
+        latest.source_database,
         latest.customer_id,
         a.index                                   as address_seq,
         upper(a.value:region::string)             as region_code,

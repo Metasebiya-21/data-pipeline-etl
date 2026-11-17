@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     mongo_collection: str = Field(..., alias="MONGO_COLLECTION")
     mongo_change_stream_db: str = Field(..., alias="MONGO_CHANGE_STREAM_DB")
     mongo_change_stream_collection: str = Field(..., alias="MONGO_CHANGE_STREAM_COLLECTION")
+    # Label stored with every record in Snowflake (defaults to the Mongo database name)
+    source_database: str = Field("", alias="SOURCE_DATABASE")
 
     # Oracle target (mongo_oracle_etl DAG)
     oracle_user: str = Field("", alias="ORACLE_USER")

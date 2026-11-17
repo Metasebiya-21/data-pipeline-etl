@@ -39,10 +39,11 @@ def copy_file_into_raw(cursor: Any, raw_table: str, stage: str, staged_file: str
     """
     cursor.execute(
         f"""
-        COPY INTO {raw_table} (change_type, customer_id, doc, extracted_epoch,
+        COPY INTO {raw_table} (change_type, source_database, customer_id, doc, extracted_epoch,
                                _source_file, _source_row, _loaded_at)
         FROM (
             SELECT $1:op::string,
+                   $1:source_database::string,
                    $1:customer_id::string,
                    $1:doc,
                    $1:extracted_epoch::number,

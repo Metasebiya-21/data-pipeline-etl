@@ -1,11 +1,14 @@
 -- One row per business owned by a customer (businesses array).
 with latest as (
-    select customer_id, doc from {{ ref('int_customers_latest') }}
+    select record_key, source_database, customer_id, doc from {{ ref('int_customers_latest') }}
     where not is_deleted
 )
 
 select
+    latest.source_database || ':' || b.value:businessId::string as business_key,
     b.value:businessId::string                            as business_id,
+    latest.record_key,
+    latest.source_database,
     latest.customer_id,
     b.value:businessName::string                          as business_name,
     b.value:businessSector::string                        as business_sector,

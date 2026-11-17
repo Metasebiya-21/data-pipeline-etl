@@ -69,6 +69,9 @@ Power BI on BI_WH (REPORTER role)
 2. **Change stream resume token stored.** Deletes that happen between hourly runs are captured. If the token has fallen out of the oplog window, the DAG logs a warning and starts a new stream, and a `FULL_REFRESH=1` run reconciles.
 3. **`max_active_runs=1`:** two runs never `COPY`/`MERGE` into the same tables at the same time.
 
+## Hands-on project
+To load two MongoDB sources and link customers across them (dbt + Snowpark), follow `docs/hands_on_project.md`.
+
 ## Run it
 1. Run `snowflake/01_setup.sql` in a Snowsight worksheet.
 2. `cp .env.example .env` and fill in MongoDB and Snowflake values.

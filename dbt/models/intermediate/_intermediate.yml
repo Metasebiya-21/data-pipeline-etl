@@ -3,5 +3,5 @@ models:
   - name: int_customers_latest
     description: Latest state per customer (including soft-deleted customers, flagged with is_deleted).
     columns:
-      - name: customer_id
+      - name: record_key
         data_tests: [unique, not_null]

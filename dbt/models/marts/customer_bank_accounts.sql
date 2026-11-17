@@ -1,10 +1,12 @@
 -- One row per bank account linked to a customer (bankInformations array).
 with latest as (
-    select customer_id, doc from {{ ref('int_customers_latest') }}
+    select record_key, source_database, customer_id, doc from {{ ref('int_customers_latest') }}
     where not is_deleted
 )
 
 select
+    latest.record_key,
+    latest.source_database,
     latest.customer_id,
     b.index                              as account_seq,
     b.value:accountNumber::string        as account_number,     -- PII: mask for analysts

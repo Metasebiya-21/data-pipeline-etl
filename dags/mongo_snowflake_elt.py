@@ -77,6 +77,7 @@ def mongo_snowflake_elt():
         last_epoch = _parse_last_epoch(Variable.get(WATERMARK_VAR, default_var=""), settings.sync_lookback_minutes)
         initial_load = _initial_load_enabled(settings)
         extracted_epoch = _epoch_now()
+        source_database = settings.source_database or settings.mongo_db
 
         upserts_by_id = {}
         deletes = set()
@@ -146,10 +147,12 @@ def mongo_snowflake_elt():
         output_path = f"/opt/airflow/data/customers_{_get_safe_run_id()}.ndjson"
         with open(output_path, "w", encoding="utf-8") as handle:
             for doc_id, doc in upserts_by_id.items():
-                handle.write(json.dumps({"op": "upsert", "customer_id": doc_id, "doc": doc,
+                handle.write(json.dumps({"op": "upsert", "source_database": source_database,
+                                         "customer_id": doc_id, "doc": doc,
                                          "extracted_epoch": extracted_epoch}, ensure_ascii=True) + "\n")
             for doc_id in deletes:
-                handle.write(json.dumps({"op": "delete", "customer_id": doc_id, "doc": None,
+                handle.write(json.dumps({"op": "delete", "source_database": source_database,
+                                         "customer_id": doc_id, "doc": None,
                                          "extracted_epoch": extracted_epoch}, ensure_ascii=True) + "\n")
 
         logger.info("Extracted upserts=%s deletes=%s change_events=%s -> %s",

@@ -19,6 +19,7 @@ CREATE STAGE IF NOT EXISTS LENDING.RAW.CUSTOMERS_STAGE FILE_FORMAT = LENDING.RAW
 --    Transient: no Fail-safe (cheaper); the files in the stage + Mongo can always reload it.
 CREATE TRANSIENT TABLE IF NOT EXISTS LENDING.RAW.CUSTOMERS_RAW (
     change_type      STRING,          -- 'upsert' | 'delete'
+    source_database  STRING,          -- which MongoDB database / bank product the record came from
     customer_id      STRING,
     doc              VARIANT,         -- full MongoDB document (NULL for deletes)
     extracted_epoch  NUMBER,          -- when Airflow extracted it

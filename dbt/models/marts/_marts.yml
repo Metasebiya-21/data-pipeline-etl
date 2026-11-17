@@ -2,21 +2,21 @@ version: 2
 
 models:
   - name: dim_customer
-    description: Current customers (SCD Type 1). Deleted customers are excluded.
+    description: Current customers (SCD Type 1), one row per source record. Deleted customers are excluded.
     columns:
-      - name: customer_id
+      - name: record_key
         data_tests: [unique, not_null]
 
   - name: customer_addresses
     description: Customer addresses flattened from the personalAddresses array, enriched with region reference data.
     columns:
-      - name: customer_id
+      - name: record_key
         data_tests:
           - not_null
           - relationships:
               arguments:
                 to: ref('dim_customer')
-                field: customer_id
+                field: record_key
       - name: region_code
         data_tests:
           - relationships:
@@ -28,14 +28,14 @@ models:
 
   - name: customer_bank_accounts
     columns:
-      - name: customer_id
+      - name: record_key
         data_tests:
           - relationships:
               arguments:
                 to: ref('dim_customer')
-                field: customer_id
+                field: record_key
 
   - name: dim_business
     columns:
-      - name: business_id
+      - name: business_key
         data_tests: [unique, not_null]
