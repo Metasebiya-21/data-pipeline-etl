@@ -7,19 +7,22 @@ from snowflake.snowpark.functions import col, iff, lit
 from snowflake.snowpark.types import FloatType, StringType
 
 
-def name_similarity(a: str, b: str) -> float:
-    import difflib
-
-    if not a or not b:
-        return 0.0
-    # token-sorted comparison, so "abebe kebede" ~ "kebede abebe"
-    a_sorted = " ".join(sorted(a.split()))
-    b_sorted = " ".join(sorted(b.split()))
-    return difflib.SequenceMatcher(None, a_sorted, b_sorted).ratio()
-
-
 def model(dbt, session):
     dbt.config(materialized="table", schema="linkage")
+
+    # Defined inside model() on purpose: dbt runs this file as a module named
+    # "main_module", which does not exist in the UDF sandbox. A top-level function is
+    # pickled by reference (main_module.name_similarity) and fails to load there;
+    # a nested function is pickled by value, so its code travels with the UDF.
+    def name_similarity(a: str, b: str) -> float:
+        import difflib
+
+        if not a or not b:
+            return 0.0
+        # token-sorted comparison, so "abebe kebede" ~ "kebede abebe"
+        a_sorted = " ".join(sorted(a.split()))
+        b_sorted = " ".join(sorted(b.split()))
+        return difflib.SequenceMatcher(None, a_sorted, b_sorted).ratio()
 
     name_sim = session.udf.register(
         name_similarity, return_type=FloatType(), input_types=[StringType(), StringType()]
