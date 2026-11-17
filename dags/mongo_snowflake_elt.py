@@ -1,9 +1,17 @@
-"""MongoDB -> Snowflake ELT with dbt.
+"""MongoDB -> Snowflake ELT with dbt, for several source databases at once.
 
+One DAG run fans out over every configured source (dynamic task mapping):
+
+  get_sources ─► extract_changes[source] ─► load_to_snowflake[source] ─► commit_state[source] ─┐
+                  (one mapped task instance per source: michu_coop, efoyta_wegagen, ...)       ├─► dbt_build
+                                                                                               ┘
 E  extract_changes   : incremental find() on updatedDate + change stream (with a stored resume token)
 L  load_to_snowflake : write NDJSON change events -> PUT to an internal stage -> COPY INTO RAW.CUSTOMERS_RAW
-   commit_state      : save the watermark / resume token ONLY after the load succeeded
-T  dbt_build         : dbt models (staging -> intermediate -> marts), tests and snapshots inside Snowflake
+   commit_state      : save that source's watermark / resume token ONLY after its load succeeded
+T  dbt_build         : dbt models, snapshot and tests, once all sources are done
+
+Sources come from MONGO_SOURCES ("mongo_db=label,mongo_db=label"). Each source keeps its
+own watermark and resume token, so one source failing never moves another source's state.
 
 See docs/snowflake_dbt_elt.md for the walkthrough.
 """
@@ -16,6 +24,7 @@ from datetime import datetime, timezone
 from airflow.decorators import dag, task
 from airflow.models import Variable
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import get_current_context
 from pymongo import MongoClient
 from pymongo.errors import OperationFailure
 
@@ -23,12 +32,14 @@ from src.airflow_state import upsert_variable
 from src.mongo_utils import normalize_mongo_document
 from src.settings import get_settings
 from src.snowflake_utils import copy_file_into_raw, get_snowflake_connection, put_file_to_stage
+from src.sources import configured_sources
 
 logger = logging.getLogger(__name__)
 
-WATERMARK_VAR = "sf_customers_last_updated_epoch"
-RESUME_TOKEN_VAR = "sf_customers_change_stream_resume_token"
-INITIAL_LOAD_DONE_VAR = "sf_customers_initial_load_done"
+
+def _state_var(name: str, label: str) -> str:
+    """Airflow Variable names are per source, e.g. sf_watermark__michu_coop."""
+    return f"sf_{name}__{label}"
 
 
 def _epoch_now() -> int:
@@ -49,15 +60,9 @@ def _get_safe_run_id() -> str:
     return run_id.replace(":", "_").replace("/", "_").replace("+", "_")
 
 
-def _initial_load_enabled(settings) -> bool:
-    if not settings.initial_load:
-        return False
-    return Variable.get(INITIAL_LOAD_DONE_VAR, default_var="0") != "1"
-
-
-def _load_resume_token():
-    raw = Variable.get(RESUME_TOKEN_VAR, default_var="")
-    return json.loads(raw) if raw else None
+def _label_map_index(label: str) -> None:
+    """Show the source label instead of 0, 1, 2 for each mapped task instance in the UI."""
+    get_current_context()["source_label"] = label
 
 
 @dag(
@@ -69,15 +74,27 @@ def _load_resume_token():
 )
 def mongo_snowflake_elt():
     @task
-    def extract_changes() -> dict:
-        settings = get_settings()
-        client = MongoClient(settings.mongo_uri)
-        collection = client[settings.mongo_db][settings.mongo_collection]
+    def get_sources() -> list:
+        sources = configured_sources()
+        logger.info("Sources for this run: %s", sources)
+        return sources
 
-        last_epoch = _parse_last_epoch(Variable.get(WATERMARK_VAR, default_var=""), settings.sync_lookback_minutes)
-        initial_load = _initial_load_enabled(settings)
+    @task(map_index_template="{{ source_label }}")
+    def extract_changes(source: dict) -> dict:
+        settings = get_settings()
+        mongo_db, label = source["mongo_db"], source["label"]
+        _label_map_index(label)
+
+        client = MongoClient(settings.mongo_uri)
+        collection = client[mongo_db][settings.mongo_collection]
+
+        last_epoch = _parse_last_epoch(
+            Variable.get(_state_var("watermark", label), default_var=""), settings.sync_lookback_minutes
+        )
+        initial_load = settings.initial_load and Variable.get(
+            _state_var("initial_load_done", label), default_var="0"
+        ) != "1"
         extracted_epoch = _epoch_now()
-        source_database = settings.source_database or settings.mongo_db
 
         upserts_by_id = {}
         deletes = set()
@@ -103,23 +120,22 @@ def mongo_snowflake_elt():
             if isinstance(updated_epoch, int) and updated_epoch > max_updated_epoch:
                 max_updated_epoch = updated_epoch
 
-        # Change stream: resume from the stored token so deletes that happened
-        # between runs are not missed.
-        change_collection = client[settings.mongo_change_stream_db][settings.mongo_change_stream_collection]
-        resume_token = _load_resume_token()
+        # Change stream on this source's collection, resumed from this source's stored token,
+        # so deletes that happened between runs are not missed.
+        raw_token = Variable.get(_state_var("resume_token", label), default_var="")
         watch_kwargs = {"full_document": "updateLookup"}
-        if resume_token:
-            watch_kwargs["resume_after"] = resume_token
+        if raw_token:
+            watch_kwargs["resume_after"] = json.loads(raw_token)
 
         deadline = time.time() + settings.change_stream_max_seconds
         processed_events = 0
         try:
-            stream = change_collection.watch(**watch_kwargs)
+            stream = collection.watch(**watch_kwargs)
         except OperationFailure:
             # The token is older than the oplog window: we cannot resume. Start fresh and
             # flag it, because deletes in the gap are lost (run with FULL_REFRESH=1 to reconcile).
-            logger.warning("Change stream resume token expired; starting a new stream. Consider a full refresh.")
-            stream = change_collection.watch(full_document="updateLookup")
+            logger.warning("[%s] resume token expired; starting a new change stream. Consider a full refresh.", label)
+            stream = collection.watch(full_document="updateLookup")
 
         with stream:
             while time.time() < deadline and processed_events < settings.change_stream_max_events:
@@ -144,20 +160,19 @@ def mongo_snowflake_elt():
             new_resume_token = stream.resume_token
 
         # One JSON object per line (NDJSON): one change event per customer.
-        output_path = f"/opt/airflow/data/customers_{_get_safe_run_id()}.ndjson"
+        output_path = f"/opt/airflow/data/customers_{label}_{_get_safe_run_id()}.ndjson"
         with open(output_path, "w", encoding="utf-8") as handle:
             for doc_id, doc in upserts_by_id.items():
-                handle.write(json.dumps({"op": "upsert", "source_database": source_database,
-                                         "customer_id": doc_id, "doc": doc,
-                                         "extracted_epoch": extracted_epoch}, ensure_ascii=True) + "\n")
+                handle.write(json.dumps({"op": "upsert", "source_database": label, "customer_id": doc_id,
+                                         "doc": doc, "extracted_epoch": extracted_epoch}, ensure_ascii=True) + "\n")
             for doc_id in deletes:
-                handle.write(json.dumps({"op": "delete", "source_database": source_database,
-                                         "customer_id": doc_id, "doc": None,
-                                         "extracted_epoch": extracted_epoch}, ensure_ascii=True) + "\n")
+                handle.write(json.dumps({"op": "delete", "source_database": label, "customer_id": doc_id,
+                                         "doc": None, "extracted_epoch": extracted_epoch}, ensure_ascii=True) + "\n")
 
-        logger.info("Extracted upserts=%s deletes=%s change_events=%s -> %s",
-                    len(upserts_by_id), len(deletes), processed_events, output_path)
+        logger.info("[%s] extracted upserts=%s deletes=%s change_events=%s -> %s",
+                    label, len(upserts_by_id), len(deletes), processed_events, output_path)
         return {
+            "label": label,
             "path": output_path,
             "events": len(upserts_by_id) + len(deletes),
             "max_updated_epoch": max_updated_epoch,
@@ -165,10 +180,11 @@ def mongo_snowflake_elt():
             "initial_load": initial_load,
         }
 
-    @task
+    @task(map_index_template="{{ source_label }}")
     def load_to_snowflake(extract: dict) -> dict:
+        _label_map_index(extract["label"])
         if extract["events"] == 0:
-            logger.info("No changes to load")
+            logger.info("[%s] no changes to load", extract["label"])
             return extract
 
         settings = get_settings()
@@ -181,19 +197,22 @@ def mongo_snowflake_elt():
             staged_file = put_file_to_stage(cursor, extract["path"], stage)
             results = copy_file_into_raw(cursor, raw_table, stage, staged_file)
             loaded = sum(r.get("rows_loaded") or 0 for r in results)
-            logger.info("Loaded %s rows from %s into %s", loaded, staged_file, raw_table)
+            logger.info("[%s] loaded %s rows from %s into %s", extract["label"], loaded, staged_file, raw_table)
         finally:
             conn.close()
         return extract
 
-    @task
+    @task(map_index_template="{{ source_label }}")
     def commit_state(extract: dict) -> None:
-        # Runs only after the raw load succeeded, so a failed load is simply retried next run.
-        upsert_variable(WATERMARK_VAR, str(extract["max_updated_epoch"]))
+        # Runs only after this source's raw load succeeded, so a failed load is simply
+        # retried next run, and other sources are unaffected.
+        label = extract["label"]
+        _label_map_index(label)
+        upsert_variable(_state_var("watermark", label), str(extract["max_updated_epoch"]))
         if extract["resume_token"]:
-            upsert_variable(RESUME_TOKEN_VAR, extract["resume_token"])
+            upsert_variable(_state_var("resume_token", label), extract["resume_token"])
         if extract["initial_load"]:
-            upsert_variable(INITIAL_LOAD_DONE_VAR, "1")
+            upsert_variable(_state_var("initial_load_done", label), "1")
 
     # Read at parse time from the environment (not get_settings()), so parsing the DAG
     # never needs Mongo/Snowflake credentials.
@@ -203,11 +222,14 @@ def mongo_snowflake_elt():
         task_id="dbt_build",
         bash_command=f"cd {dbt_project_dir} && {dbt_bin} build --profiles-dir {dbt_project_dir} --target prod",
         append_env=True,
+        # Transform whatever was loaded even if one source failed this hour: the dbt models are
+        # incremental and the failed source is simply picked up on its next successful run.
+        trigger_rule="all_done",
     )
 
-    extracted = extract_changes()
-    loaded = load_to_snowflake(extracted)
-    commit_state(loaded) >> dbt_build
+    extracted = extract_changes.expand(source=get_sources())
+    loaded = load_to_snowflake.expand(extract=extracted)
+    commit_state.expand(extract=loaded) >> dbt_build
 
 
 mongo_snowflake_elt()

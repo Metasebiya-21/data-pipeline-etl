@@ -3,12 +3,13 @@
 The same customer data as the Oracle DAG, but loaded **ELT-style** into Snowflake: land the raw documents first, then transform them inside Snowflake with dbt.
 
 ```
-MongoDB (customers)
-  │  E  extract_changes   find(updatedDate >= watermark) + change stream (resume token)
+MongoDB (one database per source: michu_coop, efoyta_wegagen, ...)
+  │  E  extract_changes[source]   one mapped task per source (dynamic task mapping):
+  │                               find(updatedDate >= watermark) + change stream (resume token)
   ▼
 NDJSON file of change events  (/opt/airflow/data/customers_<run_id>.ndjson)
-  │  L  load_to_snowflake  PUT → @RAW.CUSTOMERS_STAGE → COPY INTO RAW.CUSTOMERS_RAW   (LOAD_WH)
-  │     commit_state       save watermark + resume token only after the load succeeded
+  │  L  load_to_snowflake[source]  PUT → @RAW.CUSTOMERS_STAGE → COPY INTO RAW.CUSTOMERS_RAW   (LOAD_WH)
+  │     commit_state[source]       save that source's watermark + resume token only after its load succeeded
   ▼
 RAW.CUSTOMERS_RAW  (one row per event, full document as VARIANT, transient table)
   │  T  dbt build                                                                       (TRANSFORM_WH)
@@ -63,6 +64,13 @@ Power BI on BI_WH (REPORTER role)
 **Tests:** `unique`/`not_null` on keys, `relationships` between marts, `accepted_values` on the raw change type, source **freshness** on `_loaded_at` (warn after 2 h, error after 6 h), and a singular reconciliation test (`tests/assert_dim_customer_matches_latest.sql`).
 
 **Environments:** `generate_schema_name` writes to `STAGING`/`MARTS` in prod, and to `dev_<user>_staging` in dev, so developers never overwrite production. Credentials come from environment variables in `profiles.yml`.
+
+## Several sources: dynamic task mapping
+`MONGO_SOURCES` lists the source databases (`mongo_db=label,...`). `get_sources` returns that list and `extract_changes.expand(source=...)` creates **one task instance per source** at runtime; `load_to_snowflake` and `commit_state` are mapped over the previous task's results, so each source flows through its own chain. In the Airflow UI each instance is labelled with the source name (`map_index_template`).
+
+- **State per source:** watermark, resume token and initial-load flag are Airflow Variables named `sf_<name>__<label>`, so one source failing never moves another source's state.
+- **Adding a source** is a config change (append to `MONGO_SOURCES`), not a code change.
+- **`dbt_build`** waits for all sources and uses `trigger_rule="all_done"`: if one source fails this hour, the others are still transformed; dbt's incremental models pick up the failed source on its next successful run.
 
 ## Reliability fixes compared with the Oracle DAG
 1. **Watermark saved after the load, not before.** `commit_state` runs only if `load_to_snowflake` succeeded. If the load fails, the next run re-extracts the same window instead of skipping it.

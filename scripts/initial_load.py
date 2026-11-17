@@ -18,21 +18,12 @@ from datetime import datetime, timezone
 from pymongo import MongoClient
 
 from src.mongo_utils import normalize_mongo_document
+from src.sources import configured_sources
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger("initial_load")
 
 DOCS_PER_FILE = int(os.environ.get("DOCS_PER_FILE", "25000"))
-# "mongo_db=label,mongo_db=label": which databases to load and the label stored in Snowflake
-DEFAULT_SOURCES = "coop-customer-management-db=michu_coop,wegagen-customer-management-db=efoyta_wegagen"
-
-
-def parse_sources(spec: str):
-    sources = []
-    for item in spec.split(","):
-        mongo_db, _, label = item.strip().partition("=")
-        sources.append((mongo_db, label or mongo_db))
-    return sources
 
 
 def snowflake_connection():
@@ -99,13 +90,14 @@ def load_file(cursor, path: str) -> int:
 def main():
     mongo = MongoClient(os.environ["MONGO_URI"])
     collection_name = os.environ.get("MONGO_COLLECTION", "customers")
-    sources = parse_sources(os.environ.get("INITIAL_LOAD_SOURCES", DEFAULT_SOURCES))
+    sources = configured_sources()
 
     conn = snowflake_connection()
     try:
         cursor = conn.cursor()
         with tempfile.TemporaryDirectory() as out_dir:
-            for mongo_db, label in sources:
+            for source in sources:
+                mongo_db, label = source["mongo_db"], source["label"]
                 collection = mongo[mongo_db][collection_name]
                 expected = collection.estimated_document_count()
                 logger.info("Loading %s.%s as '%s' (~%s documents)", mongo_db, collection_name, label, expected)
