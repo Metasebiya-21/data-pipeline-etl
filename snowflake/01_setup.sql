@@ -1,55 +1,64 @@
--- One-time Snowflake setup for the MongoDB -> Snowflake ELT (run as ACCOUNTADMIN / SECURITYADMIN + SYSADMIN).
+-- One-time Snowflake setup for the MongoDB -> Snowflake ELT.
+-- Run it all as ACCOUNTADMIN in a Snowsight worksheet (Run All / Cmd+Shift+Enter).
+-- Safe to re-run: everything uses IF NOT EXISTS, and grants are idempotent.
+--
+-- Order matters: roles first (SECURITYADMIN), then objects AND their grants by the
+-- role that owns them (SYSADMIN), so every GRANT runs as the owner of the object.
 
-USE ROLE SYSADMIN;
-
--- 1) Compute: one warehouse per workload, so loading, dbt and BI never compete
-CREATE WAREHOUSE IF NOT EXISTS LOAD_WH      WAREHOUSE_SIZE = XSMALL AUTO_SUSPEND = 60  AUTO_RESUME = TRUE INITIALLY_SUSPENDED = TRUE;
-CREATE WAREHOUSE IF NOT EXISTS TRANSFORM_WH WAREHOUSE_SIZE = XSMALL AUTO_SUSPEND = 60  AUTO_RESUME = TRUE INITIALLY_SUSPENDED = TRUE;
-CREATE WAREHOUSE IF NOT EXISTS BI_WH        WAREHOUSE_SIZE = XSMALL AUTO_SUSPEND = 300 AUTO_RESUME = TRUE INITIALLY_SUSPENDED = TRUE;
-
--- 2) Storage: database and the raw landing schema (dbt creates STAGING / INTERMEDIATE / MARTS / SNAPSHOTS)
-CREATE DATABASE IF NOT EXISTS LENDING;
-CREATE SCHEMA IF NOT EXISTS LENDING.RAW;
-
--- 3) Where files wait before loading: a named internal stage with a JSON file format
-CREATE FILE FORMAT IF NOT EXISTS LENDING.RAW.NDJSON_FORMAT TYPE = JSON;
-CREATE STAGE IF NOT EXISTS LENDING.RAW.CUSTOMERS_STAGE FILE_FORMAT = LENDING.RAW.NDJSON_FORMAT;
-
--- 4) Raw landing table: one row per change event, the whole Mongo document kept as VARIANT.
---    Transient: no Fail-safe (cheaper); the files in the stage + Mongo can always reload it.
-CREATE TRANSIENT TABLE IF NOT EXISTS LENDING.RAW.CUSTOMERS_RAW (
-    change_type      STRING,          -- 'upsert' | 'delete'
-    source_database  STRING,          -- which MongoDB database / bank product the record came from
-    customer_id      STRING,
-    doc              VARIANT,         -- full MongoDB document (NULL for deletes)
-    extracted_epoch  NUMBER,          -- when Airflow extracted it
-    _source_file     STRING,          -- METADATA$FILENAME
-    _source_row      NUMBER,          -- METADATA$FILE_ROW_NUMBER
-    _loaded_at       TIMESTAMP_LTZ    -- when COPY INTO loaded it
-) DATA_RETENTION_TIME_IN_DAYS = 1;
-
--- 5) Roles (least privilege): Airflow loads as LOADER, dbt transforms as TRANSFORMER, Power BI reads as REPORTER
+-- 1) Roles (least privilege): Airflow loads as LOADER, dbt transforms as TRANSFORMER,
+--    Power BI reads as REPORTER. SYSADMIN sits above them in the role hierarchy.
 USE ROLE SECURITYADMIN;
 CREATE ROLE IF NOT EXISTS LOADER;
 CREATE ROLE IF NOT EXISTS TRANSFORMER;
 CREATE ROLE IF NOT EXISTS REPORTER;
 GRANT ROLE LOADER, TRANSFORMER, REPORTER TO ROLE SYSADMIN;
 
+-- 2) Compute: one warehouse per workload, so loading, dbt and BI never compete
+USE ROLE SYSADMIN;
+CREATE WAREHOUSE IF NOT EXISTS LOAD_WH      WAREHOUSE_SIZE = XSMALL AUTO_SUSPEND = 60  AUTO_RESUME = TRUE INITIALLY_SUSPENDED = TRUE;
+CREATE WAREHOUSE IF NOT EXISTS TRANSFORM_WH WAREHOUSE_SIZE = XSMALL AUTO_SUSPEND = 60  AUTO_RESUME = TRUE INITIALLY_SUSPENDED = TRUE;
+CREATE WAREHOUSE IF NOT EXISTS BI_WH        WAREHOUSE_SIZE = XSMALL AUTO_SUSPEND = 300 AUTO_RESUME = TRUE INITIALLY_SUSPENDED = TRUE;
+
 GRANT USAGE ON WAREHOUSE LOAD_WH      TO ROLE LOADER;
 GRANT USAGE ON WAREHOUSE TRANSFORM_WH TO ROLE TRANSFORMER;
 GRANT USAGE ON WAREHOUSE BI_WH        TO ROLE REPORTER;
 
+-- 3) Storage: database and the raw landing schema (dbt creates STAGING / INTERMEDIATE / MARTS / ...)
+CREATE DATABASE IF NOT EXISTS LENDING;
+CREATE SCHEMA IF NOT EXISTS LENDING.RAW;
+
+-- 4) Where files wait before loading: a named internal stage with a JSON file format
+CREATE FILE FORMAT IF NOT EXISTS LENDING.RAW.NDJSON_FORMAT TYPE = JSON;
+CREATE STAGE IF NOT EXISTS LENDING.RAW.CUSTOMERS_STAGE FILE_FORMAT = LENDING.RAW.NDJSON_FORMAT;
+
+-- 5) Raw landing table: one row per change event, the whole Mongo document kept as VARIANT.
+--    Transient: no Fail-safe (cheaper); the files in the stage + Mongo can always reload it.
+CREATE TRANSIENT TABLE IF NOT EXISTS LENDING.RAW.CUSTOMERS_RAW (
+    change_type      STRING,          -- 'upsert' | 'delete'
+    source_database  STRING,          -- which MongoDB database / bank product the record came from
+    customer_id      STRING,
+    doc              VARIANT,         -- full MongoDB document (NULL for deletes)
+    extracted_epoch  NUMBER,          -- when it was extracted
+    _source_file     STRING,          -- METADATA$FILENAME
+    _source_row      NUMBER,          -- METADATA$FILE_ROW_NUMBER
+    _loaded_at       TIMESTAMP_LTZ    -- when COPY INTO loaded it
+) DATA_RETENTION_TIME_IN_DAYS = 1;
+
+-- 6) Object privileges, granted by SYSADMIN (the owner)
 GRANT USAGE ON DATABASE LENDING TO ROLE LOADER;
 GRANT USAGE ON DATABASE LENDING TO ROLE TRANSFORMER;
 GRANT USAGE ON DATABASE LENDING TO ROLE REPORTER;
 
+--    LOADER: put files in the stage and insert into the raw table
 GRANT USAGE ON SCHEMA LENDING.RAW TO ROLE LOADER;
 GRANT READ, WRITE ON STAGE LENDING.RAW.CUSTOMERS_STAGE TO ROLE LOADER;
 GRANT USAGE ON FILE FORMAT LENDING.RAW.NDJSON_FORMAT TO ROLE LOADER;
 GRANT INSERT, SELECT ON TABLE LENDING.RAW.CUSTOMERS_RAW TO ROLE LOADER;
 
+--    TRANSFORMER (dbt): read raw, create its own schemas and objects
 GRANT USAGE ON SCHEMA LENDING.RAW TO ROLE TRANSFORMER;
 GRANT SELECT ON ALL TABLES IN SCHEMA LENDING.RAW TO ROLE TRANSFORMER;
+GRANT SELECT ON FUTURE TABLES IN SCHEMA LENDING.RAW TO ROLE TRANSFORMER;
 GRANT CREATE SCHEMA ON DATABASE LENDING TO ROLE TRANSFORMER;
 
 -- REPORTER gets SELECT on the marts schema after dbt creates it:
@@ -57,10 +66,15 @@ GRANT CREATE SCHEMA ON DATABASE LENDING TO ROLE TRANSFORMER;
 --   GRANT SELECT ON ALL TABLES IN SCHEMA LENDING.MARTS TO ROLE REPORTER;
 --   GRANT SELECT ON FUTURE TABLES IN SCHEMA LENDING.MARTS TO ROLE REPORTER;
 
--- 6) Cost guardrail for this project
+-- 7) Cost guardrail for this project (resource monitors need ACCOUNTADMIN)
 USE ROLE ACCOUNTADMIN;
 CREATE RESOURCE MONITOR IF NOT EXISTS ELT_MONITOR WITH CREDIT_QUOTA = 20
   TRIGGERS ON 80 PERCENT DO NOTIFY
            ON 100 PERCENT DO SUSPEND;
 ALTER WAREHOUSE LOAD_WH      SET RESOURCE_MONITOR = ELT_MONITOR;
 ALTER WAREHOUSE TRANSFORM_WH SET RESOURCE_MONITOR = ELT_MONITOR;
+
+-- 8) Checks (run each separately to see its result)
+-- SHOW WAREHOUSES;
+-- SHOW GRANTS TO ROLE LOADER;
+-- SHOW GRANTS TO ROLE TRANSFORMER;
