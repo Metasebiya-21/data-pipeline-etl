@@ -1,16 +1,24 @@
 import logging
 import os
+from pathlib import Path
 from typing import Any, Dict, List
 
 from src.settings import Settings
 
 logger = logging.getLogger(__name__)
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
 
 def auth_kwargs(password: str = "", private_key_file: str = "", private_key_file_pwd: str = "") -> Dict[str, Any]:
     """Key-pair (JWT) auth when a private key file is configured, otherwise password auth."""
     if private_key_file:
-        kwargs: Dict[str, Any] = {"authenticator": "SNOWFLAKE_JWT", "private_key_file": private_key_file}
+        # A relative path (e.g. secrets/rsa_key.p8) is relative to the project root,
+        # so it works whatever directory the script is started from.
+        key_path = Path(private_key_file)
+        if not key_path.is_absolute():
+            key_path = PROJECT_ROOT / key_path
+        kwargs: Dict[str, Any] = {"authenticator": "SNOWFLAKE_JWT", "private_key_file": str(key_path)}
         if private_key_file_pwd:
             kwargs["private_key_file_pwd"] = private_key_file_pwd
         return kwargs

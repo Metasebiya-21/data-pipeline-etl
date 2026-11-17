@@ -8,7 +8,8 @@ lending_dw:
       user: "{{ env_var('SNOWFLAKE_USER') }}"
       # Key-pair auth if SNOWFLAKE_PRIVATE_KEY_FILE is set, otherwise password (empty values are ignored)
       password: "{{ env_var('SNOWFLAKE_PASSWORD', '') }}"
-      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_FILE', '') }}"
+      # relative paths are relative to the project root; dbt runs from dbt/, hence '../'
+      private_key_path: "{% set key = env_var('SNOWFLAKE_PRIVATE_KEY_FILE', '') %}{{ key if (not key or key.startswith('/')) else '../' ~ key }}"
       private_key_passphrase: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_FILE_PWD', '') }}"
       role: "{{ env_var('SNOWFLAKE_TRANSFORMER_ROLE', 'TRANSFORMER') }}"
       warehouse: "{{ env_var('SNOWFLAKE_TRANSFORM_WAREHOUSE', 'TRANSFORM_WH') }}"
@@ -21,7 +22,8 @@ lending_dw:
       user: "{{ env_var('SNOWFLAKE_USER') }}"
       # Key-pair auth if SNOWFLAKE_PRIVATE_KEY_FILE is set, otherwise password (empty values are ignored)
       password: "{{ env_var('SNOWFLAKE_PASSWORD', '') }}"
-      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_FILE', '') }}"
+      # relative paths are relative to the project root; dbt runs from dbt/, hence '../'
+      private_key_path: "{% set key = env_var('SNOWFLAKE_PRIVATE_KEY_FILE', '') %}{{ key if (not key or key.startswith('/')) else '../' ~ key }}"
       private_key_passphrase: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_FILE_PWD', '') }}"
       role: "{{ env_var('SNOWFLAKE_TRANSFORMER_ROLE', 'TRANSFORMER') }}"
       warehouse: "{{ env_var('SNOWFLAKE_TRANSFORM_WAREHOUSE', 'TRANSFORM_WH') }}"
