@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 from pymongo import MongoClient
 
 from src.mongo_utils import normalize_mongo_document
+from src.snowflake_utils import auth_kwargs
 from src.sources import configured_sources
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -32,7 +33,11 @@ def snowflake_connection():
     return snowflake.connector.connect(
         account=os.environ["SNOWFLAKE_ACCOUNT"],
         user=os.environ["SNOWFLAKE_USER"],
-        password=os.environ["SNOWFLAKE_PASSWORD"],
+        **auth_kwargs(
+            os.environ.get("SNOWFLAKE_PASSWORD", ""),
+            os.environ.get("SNOWFLAKE_PRIVATE_KEY_FILE", ""),
+            os.environ.get("SNOWFLAKE_PRIVATE_KEY_FILE_PWD", ""),
+        ),
         role=os.environ.get("SNOWFLAKE_LOADER_ROLE", "LOADER"),
         warehouse=os.environ.get("SNOWFLAKE_LOAD_WAREHOUSE", "LOAD_WH"),
         database=os.environ.get("SNOWFLAKE_DATABASE", "LENDING"),

@@ -13,3 +13,8 @@ logs
 data
 .DS_Store
 db
+
+# Snowflake key-pair auth: never commit private keys
+*.p8
+*.pem
+secrets/

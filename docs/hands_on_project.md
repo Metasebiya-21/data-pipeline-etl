@@ -26,19 +26,30 @@ pip install -r requirements-local.txt
 ## Step 1: Snowflake trial and setup
 1. Sign up at signup.snowflake.com: **Enterprise** edition, AWS, a nearby region.
 2. In Snowsight, open a SQL worksheet and run all of `snowflake/01_setup.sql`.
-3. Give the roles to your own user (replace `<YOUR_USER>`):
+3. Give the roles to your own user:
    ```sql
    USE ROLE SECURITYADMIN;
-   GRANT ROLE LOADER TO USER <YOUR_USER>;
-   GRANT ROLE TRANSFORMER TO USER <YOUR_USER>;
+   GRANT ROLE LOADER TO USER metasebiya8;
+   GRANT ROLE TRANSFORMER TO USER metasebiya8;
+   GRANT ROLE REPORTER TO USER metasebiya8;
    ```
+   Use `ACCOUNTADMIN` only for this setup. The loader and dbt then connect as `LOADER` and `TRANSFORMER` (least privilege), on `LOAD_WH` and `TRANSFORM_WH` instead of the trial's default `COMPUTE_WH`.
 4. Python models need the Anaconda terms accepted once: **Admin → Billing & Terms → Anaconda → Enable** (as ORGADMIN/ACCOUNTADMIN).
 
-## Step 2: configure `.env`
+## Step 2: configure `.env` (key-pair auth)
 ```bash
-cp .env.example .env     # then edit it
+cp .env.example .env              # then edit it
+mkdir -p secrets && cp /path/to/rsa_key.p8 secrets/   # git-ignored
 ```
-Fill in `MONGO_URI` (your local replica set), `SNOWFLAKE_ACCOUNT` (format `orgname-accountname`, from Snowsight → account menu), `SNOWFLAKE_USER`, `SNOWFLAKE_PASSWORD`. `.env` is git-ignored: never commit it.
+Fill in:
+- `MONGO_URI`: your local replica set.
+- `SNOWFLAKE_ACCOUNT=EPKYLDR-IJ60085` (orgname-accountname) and `SNOWFLAKE_USER=metasebiya8`.
+- `SNOWFLAKE_PRIVATE_KEY_FILE`: the **absolute** path to the key. On your Mac: `/Users/<you>/.../data-pipeline-etl/secrets/rsa_key.p8`. Inside Docker/Airflow: `/opt/airflow/secrets/rsa_key.p8`.
+- `SNOWFLAKE_PRIVATE_KEY_FILE_PWD`: only if the key is encrypted. Leave `SNOWFLAKE_PASSWORD` empty.
+
+The matching **public** key must be on your user (check with `DESC USER metasebiya8;` → `RSA_PUBLIC_KEY_FP`). If not: `ALTER USER metasebiya8 SET RSA_PUBLIC_KEY='MIIBIj...';` (the key body, without the BEGIN/END lines).
+
+`.env`, `secrets/` and `*.p8` are git-ignored: never commit them.
 
 ## Step 3: load MongoDB into Snowflake (EL)
 ```bash

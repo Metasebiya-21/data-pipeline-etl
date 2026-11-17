@@ -27,6 +27,7 @@ x-airflow-common: &airflow-common
     - ./.env:/opt/airflow/.env
     - ./data:/opt/airflow/data
     - ./dbt:/opt/airflow/dbt
+    - ./secrets:/opt/airflow/secrets:ro   # Snowflake private key (rsa_key.p8), git-ignored
   networks:
     - qena-network
   depends_on:

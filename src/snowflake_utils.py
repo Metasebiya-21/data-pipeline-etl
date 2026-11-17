@@ -7,13 +7,27 @@ from src.settings import Settings
 logger = logging.getLogger(__name__)
 
 
+def auth_kwargs(password: str = "", private_key_file: str = "", private_key_file_pwd: str = "") -> Dict[str, Any]:
+    """Key-pair (JWT) auth when a private key file is configured, otherwise password auth."""
+    if private_key_file:
+        kwargs: Dict[str, Any] = {"authenticator": "SNOWFLAKE_JWT", "private_key_file": private_key_file}
+        if private_key_file_pwd:
+            kwargs["private_key_file_pwd"] = private_key_file_pwd
+        return kwargs
+    return {"password": password}
+
+
 def get_snowflake_connection(settings: Settings) -> Any:
     import snowflake.connector
 
     return snowflake.connector.connect(
         account=settings.snowflake_account,
         user=settings.snowflake_user,
-        password=settings.snowflake_password,
+        **auth_kwargs(
+            settings.snowflake_password,
+            settings.snowflake_private_key_file,
+            settings.snowflake_private_key_file_pwd,
+        ),
         role=settings.snowflake_role,
         warehouse=settings.snowflake_warehouse,
         database=settings.snowflake_database,

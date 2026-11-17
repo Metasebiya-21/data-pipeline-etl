@@ -29,6 +29,9 @@ class Settings(BaseSettings):
     snowflake_account: str = Field("", alias="SNOWFLAKE_ACCOUNT")
     snowflake_user: str = Field("", alias="SNOWFLAKE_USER")
     snowflake_password: str = Field("", alias="SNOWFLAKE_PASSWORD")
+    # Key-pair auth (preferred): path to the PKCS#8 private key, and its passphrase if encrypted
+    snowflake_private_key_file: str = Field("", alias="SNOWFLAKE_PRIVATE_KEY_FILE")
+    snowflake_private_key_file_pwd: str = Field("", alias="SNOWFLAKE_PRIVATE_KEY_FILE_PWD")
     snowflake_role: str = Field("LOADER", alias="SNOWFLAKE_LOADER_ROLE")
     snowflake_warehouse: str = Field("LOAD_WH", alias="SNOWFLAKE_LOAD_WAREHOUSE")
     snowflake_database: str = Field("LENDING", alias="SNOWFLAKE_DATABASE")
