@@ -1,0 +1,15 @@
+region_code,region_name,region_type
+ADDIS_ABABA,Addis Ababa,city_administration
+DIRE_DAWA,Dire Dawa,city_administration
+AFAR,Afar,regional_state
+AMHARA,Amhara,regional_state
+BENISHANGUL_GUMUZ,Benishangul-Gumuz,regional_state
+CENTRAL_ETHIOPIA,Central Ethiopia,regional_state
+GAMBELA,Gambela,regional_state
+HARARI,Harari,regional_state
+OROMIA,Oromia,regional_state
+SIDAMA,Sidama,regional_state
+SOMALI,Somali,regional_state
+SOUTH_ETHIOPIA,South Ethiopia,regional_state
+SOUTH_WEST_ETHIOPIA,South West Ethiopia Peoples',regional_state
+TIGRAY,Tigray,regional_state

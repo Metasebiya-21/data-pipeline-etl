@@ -1,0 +1,7 @@
+version: 2
+seeds:
+  - name: region_codes
+    description: Reference data (MDM) - official region codes used to standardise free-text regions.
+    columns:
+      - name: region_code
+        data_tests: [unique, not_null]

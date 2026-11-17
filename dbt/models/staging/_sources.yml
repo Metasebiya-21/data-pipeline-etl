@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ env_var('SNOWFLAKE_DATABASE', 'LENDING') }}"
+    schema: raw
+    description: Landing tables loaded by Airflow (PUT + COPY INTO) or Snowpipe.
+    tables:
+      - name: customers_raw
+        description: One row per change event extracted from MongoDB. `doc` holds the full document as VARIANT.
+        config:
+          loaded_at_field: _loaded_at
+          freshness:                       # hourly DAG: warn if 2h behind, fail if 6h behind
+            warn_after: {count: 2, period: hour}
+            error_after: {count: 6, period: hour}
+        columns:
+          - name: change_type
+            data_tests:
+              - accepted_values:
+                  arguments:
+                    values: ['upsert', 'delete']
+          - name: customer_id
+            data_tests: [not_null]

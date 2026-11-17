@@ -1,0 +1,7 @@
+version: 2
+models:
+  - name: stg_customer_events
+    description: Typed view over RAW.CUSTOMERS_RAW, one row per change event.
+    columns:
+      - name: customer_id
+        data_tests: [not_null]

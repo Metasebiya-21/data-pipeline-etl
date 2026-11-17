@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: Current customers (SCD Type 1). Deleted customers are excluded.
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+
+  - name: customer_addresses
+    description: Customer addresses flattened from the personalAddresses array, enriched with region reference data.
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: region_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('region_codes')
+                field: region_code
+              config:
+                severity: warn      # an unknown region is a data-quality signal, not a pipeline failure
+
+  - name: customer_bank_accounts
+    columns:
+      - name: customer_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+
+  - name: dim_business
+    columns:
+      - name: business_id
+        data_tests: [unique, not_null]

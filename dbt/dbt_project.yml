@@ -1,0 +1,31 @@
+name: lending_dw
+version: '1.0.0'
+profile: lending_dw
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  lending_dw:
+    +query_tag: dbt_lending_dw
+    staging:
+      +schema: staging
+      +materialized: view          # thin renaming/typing layer, always fresh, no storage
+    intermediate:
+      +schema: intermediate
+      +materialized: incremental   # only new raw events are processed each run
+    marts:
+      +schema: marts
+      +materialized: table         # what Power BI reads (on BI_WH)
+
+seeds:
+  lending_dw:
+    +schema: reference
+
+snapshots:
+  lending_dw:
+    +target_schema: snapshots

@@ -9,6 +9,12 @@ This project runs an Apache Airflow pipeline (Docker) that syncs MongoDB custome
 - Pydantic settings loaded from `.env`
 - Detailed docs in `docs/`
 
+## Snowflake + dbt version (ELT)
+`dags/mongo_snowflake_elt.py` loads the same customers into **Snowflake** instead of Oracle: change events are staged and loaded with `COPY INTO` into a raw VARIANT table, then **dbt** (`dbt/`) builds staging, incremental and mart models, an SCD2 address snapshot and tests.
+- Setup SQL: `snowflake/01_setup.sql` (optional Snowpipe: `snowflake/02_snowpipe_s3.sql`)
+- Config: copy `.env.example` to `.env`
+- Walkthrough: `docs/snowflake_dbt_elt.md`
+
 ## Prerequisites
 - Docker
 - MongoDB replica set (required for change streams)
